@@ -17,7 +17,7 @@ def thrust(t)
     else:
         return M_DOT_E_LV*I_SP_LV*g_0
     
-def air_density(h)
+def air_density(h):
     return RHO_0*math.exp(-h/H_0)
 
 def drag(v, h):
