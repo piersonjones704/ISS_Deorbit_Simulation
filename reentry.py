@@ -26,6 +26,3 @@ if __name__ == '__main__':
     main(x0, y0, vx0, vy0, tstep)
     ts, xs, ys, vxs, vys = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     plot_position_earth(xs, ys)
-
-
-    
