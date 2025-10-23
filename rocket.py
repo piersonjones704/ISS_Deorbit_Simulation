@@ -56,9 +56,9 @@ def approx(sim_time, t_step, h_0, v_0):
         if h <= 0 and t > 0:
             h_plot[i] = 0
             v_plot[i] = v
-            t_plot = t_plot[:i+1]
-            h_plot = h_plot[:i+1]
-            v_plot = v_plot[:i+1]
+            t_plot = t_plot[:i-110]
+            h_plot = h_plot[:i-110]
+            v_plot = v_plot[:i-110]
             break
     return t_plot, h_plot, v_plot
     
@@ -66,13 +66,14 @@ def approx(sim_time, t_step, h_0, v_0):
 def main():
     # TODO: write me
     sim_time = 20*burn_time
-    t_step = 0.5
+    t_step = 0.1
     h_0 = 0
     v_0 = 0
     time, height, velocity = approx(sim_time, t_step, h_0, v_0)
     plot_simple(time, height)
     plot_simple(time, velocity)
-
+    print(f"the maximum height is {round(max(height), 3)}m")
+    print(f"the maximum velocity is {round(max(velocity), 3)}m/s")
 
 if __name__ == '__main__':
     main()
