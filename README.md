@@ -1,5 +1,8 @@
 # Our Super Awesome Project - ISS Deorbit Project
 
+# Live Document Links
+Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2rmjjUFR3-em32RshCD2co25l5qMrgn1TTljqvA/edit?usp=sharing)
+
 ## Description
 
 What problem are you solving? 
