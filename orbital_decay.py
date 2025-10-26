@@ -3,11 +3,12 @@ from plot import plot_position_earth
 
 
 def orbital_decay(altitude, velocity, time):
+    altitudem = altitude * 1000
     vx = velocity
     vy = 0
     x = 0
-    y = altitude + R_EARTH
-    r = altitude + R_EARTH
+    y = altitudem + R_EARTH
+    r = altitudem + R_EARTH
     timetotal = time * 60
     dt = .1
     t = 0
@@ -36,11 +37,14 @@ def orbital_decay(altitude, velocity, time):
         y += vy * dt
 
         t += dt
+        if r <= R_EARTH: 
+            break
     plot_position_earth(x_val,y_val)
+    return x_val, y_val, vy_val, vx_val, t_val
 
 def main():
     # TODO: write me
-    orbital_decay(400000,7670,100)
+    orbital_decay(400,7670,90)
     
 
 if __name__ == '__main__':
