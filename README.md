@@ -1,6 +1,6 @@
 # Our Super Awesome Project - ISS Deorbit Project
 
-# Live Document Links
+## Live Document Links
 Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2rmjjUFR3-em32RshCD2co25l5qMrgn1TTljqvA/edit?usp=sharing)
 
 ## Description
@@ -48,7 +48,20 @@ How to run team member's program. How to input data and what kind of output to e
 
 ### [Role 3] - Reentry Trajectory
 
-How to run team member's program. How to input data and what kind of output to expect.
+Upon providing the initial altitude and x- and y-velocity parameters, this program is ran by pressing the play button while in the "reentry.py" file. 
+
+For this milestone, the reentry trajectory and simulation depend entirly on the initial altitude and initial x and y velocity. Data can be input by altering the initial altitude and its units, and the initial velocity parameters in the "reentry.py" file. Ensure that after altering the parameters, the data is saved. These parameters appear as follows:
+* Initial altitude = 130 
+* Input units = 'km'
+* Initial x-velocity = 7800 m/s 
+* Initial y-velocity = 0 m/s 
+
+In regards to the output, the simulation should output time, position, and velocity as list data types. It should also plot the x- and y- position of the mass. In this section these assumptions should be made:
+- Drag is negligible.
+- The ISS and deorbit vehicle remain docked for the duration of the descent.
+- The simulation stops when the mass reaches zero altitude.
+It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
+
 
 ### [Role 4] - Rocket Trajectory
 
