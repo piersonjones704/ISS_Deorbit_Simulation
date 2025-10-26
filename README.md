@@ -40,7 +40,14 @@ Let people know what your project can do specifically.
 
 ### [Role 1] - Orbital Decay
 
-How to run team member's program. How to input data and what kind of output to expect.
+The use of the program requires the input of an initial altitude, velocity, and the length of simualtion. The order of input is as follows:
+* Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
+* Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
+* Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
+
+Note: The example of the orbital_decay program has an initial altitude of 400 km, velocity of 7670 m/s, and runs for 90 minutes.
+
+At the end of the simulation the program returns a list of the x-positions, y-positions, x-velocities, y-velocities, and time, for each iteration of the simulation. Additionally, it creates a plot of the x and y positions of the station. 
 
 ### [Role 2] - Final Burn
 
