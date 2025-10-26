@@ -1,9 +1,7 @@
-initial_altitude = 130
-x_initial_velocity = 7800
-y_initial_velocity = 0
+from reentry import initial_altitude, input_units
 
-def unit_converter_initialaltitude(initial_altitude = 130, input_unit = 'km', output_unit = 'm'):
-    unit_conversion = initial_altitude_conversion_process(initial_altitude, input_unit, output_unit)
+def unit_converter_initialaltitude(initial_altitude, input_units, output_unit = 'm'):
+    unit_conversion = initial_altitude_conversion_process(initial_altitude, input_units, output_unit)
     y0 = unit_conversion
     return(y0) 
     
@@ -23,4 +21,4 @@ def initial_altitude_conversion_process(initial_altitude, input_unit, output_uni
     return y
 
 if __name__ == '__main__':
-    unit_converter_initialaltitude()
+    unit_converter_initialaltitude(initial_altitude, input_units, output_unit = 'm')
