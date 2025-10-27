@@ -25,7 +25,8 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
         altitude = r - R_EARTH
         # End the function when the mass hits the ground
         if altitude <= 0:
-            break
+            status = 'hit_ground'
+            return t_list, x_list, y_list, vx_list, vy_list, status
         # Update x for each step
         else:
             ax = -mu * x / r**3
@@ -40,7 +41,8 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
         y_list.append(y)
         vx_list.append(vx)
         vy_list.append(vy)
-    return t_list, x_list, y_list, vx_list, vy_list
+        status = 'orbiting or escaped orbit'
+    return t_list, x_list, y_list, vx_list, vy_list, status
 
 
 if __name__ == '__main__': 
@@ -54,4 +56,4 @@ if __name__ == '__main__':
     vx0 = x_initial_velocity
     vy0 = y_initial_velocity
     mu = G * M_EARTH
-    ts, xs, ys, vxs, vys = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
+    ts, xs, ys, vxs, vys, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
