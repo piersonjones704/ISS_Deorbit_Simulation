@@ -34,6 +34,9 @@ The scientific principles behind our project are:
 
 ### Features
 
+Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
+
+
 Let people know what your project can do specifically.
 
 ## Usage
