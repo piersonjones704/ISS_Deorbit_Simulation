@@ -34,7 +34,7 @@ The scientific principles behind our project are:
 
 ### Features
 
-Let people know what your project can do specifically.
+Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
 
 ## Usage
 
@@ -74,18 +74,20 @@ It will be apparent that the program ran succesfully if it outputs eveything pre
 
 ### [Role 4] - Rocket Trajectory
 
-How to run team member's program. How to input data and what kind of output to expect.
+<<<<<<< HEAD
+Given standard rocket parameters, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
 
+=======
+Given standard rocket parameters, and initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
+>>>>>>> 8af834278ef459a3c91e66d169920d6b16b47b2c
 ## Testing
 
-Describe what test cases you are providing with your project and how to run them.
-
-Describe why the output is correct or how you know there are errors and what you plan to do in Phase 2 to address them.
+To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. w
 
 ## Roadmap
 
-What features do you plan to contribute in Phase 2?
+In Phase 2 we plan to combine the programs from the four individual stage of the deorbit process into one cohesive program that remains highly responsive to changes in forces, conditions, and other external variables. Additionally, we aim to refine the program and improve the clarity of the resulting plots to greatly improve readability and overall quality.
 
 ## Authors and Acknowledgment
+Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
 
-Show your appreciation to those who have contributed to the project.
