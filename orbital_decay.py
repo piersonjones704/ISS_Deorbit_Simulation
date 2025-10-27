@@ -45,6 +45,17 @@ def orbital_decay(altitude, velocity, time):
 def main():
     # TODO: write me
     orbital_decay(400,7670,90)
+
+    #Cases that hit the ground
+    orbital_decay(400,7070,90)
+    orbital_decay(100,7670,90)
+
+    #Cases that work
+    orbital_decay(300,7670,90)
+    orbital_decay(300,8000,90)
+
+
+
     
 
 if __name__ == '__main__':

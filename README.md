@@ -36,9 +36,6 @@ The scientific principles behind our project are:
 
 Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
 
-
-Let people know what your project can do specifically.
-
 ## Usage
 
 ### [Role 1] - Orbital Decay
@@ -54,7 +51,15 @@ At the end of the simulation the program returns a list of the x-positions, y-po
 
 ### [Role 2] - Final Burn
 
-How to run team member's program. How to input data and what kind of output to expect.
+the program allows user to simulate the final burn of the phase of the rocket, plotting the x and y coordinates for the iss, some inputs value are recquired for the simulation to be optimal, altitude of the iss, the initial velocity of which the rocket is travling and how long the simulation will last is recquired. 
+
+altitude: this is the height of the iss, which the altitude + the radius of the earth is the initial y coordinate of the ISS
+
+velocity: this is the speed at which the iss is travelling in tangent to the earth, or in simple terms, the linear component of the orbital speed of the ISS, which is denoted as the initial speed in the x direction
+
+time: this is an indicator on how long the  simulation will last, measured in minutes.
+
+the output of the simulation will display the orbital path of the ISS on a x-y coordinate map, allowing the user to visualize the process of the final burn of the ISS.
 
 ### [Role 3] - Reentry Trajectory
 
@@ -72,20 +77,23 @@ In regards to the output, the simulation should output time, position, and veloc
 - The simulation stops when the mass reaches zero altitude.
 It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
 
+
 ### [Role 4] - Rocket Trajectory
 
+<<<<<<< HEAD
 Given standard rocket parameters, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
 
+=======
+Given standard rocket parameters, and initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
+>>>>>>> 8af834278ef459a3c91e66d169920d6b16b47b2c
 ## Testing
 
-Describe what test cases you are providing with your project and how to run them.
-
-Describe why the output is correct or how you know there are errors and what you plan to do in Phase 2 to address them.
+To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. w
 
 ## Roadmap
 
-What features do you plan to contribute in Phase 2?
+In Phase 2 we plan to combine the programs from the four individual stage of the deorbit process into one cohesive program that remains highly responsive to changes in forces, conditions, and other external variables. Additionally, we aim to refine the program and improve the clarity of the resulting plots to greatly improve readability and overall quality.
 
 ## Authors and Acknowledgment
+Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
 
-Show your appreciation to those who have contributed to the project.
