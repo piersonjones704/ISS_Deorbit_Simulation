@@ -36,9 +36,6 @@ The scientific principles behind our project are:
 
 Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
 
-
-Let people know what your project can do specifically.
-
 ## Usage
 
 ### [Role 1] - Orbital Decay
@@ -85,7 +82,7 @@ Describe why the output is correct or how you know there are errors and what you
 
 ## Roadmap
 
-What features do you plan to contribute in Phase 2?
+In Phase 2 we plan to combine the programs from the four individual stage of the deorbit process into one cohesive program that remains highly responsive to changes in forces, conditions, and other external variables. Additionally, we aim to refine the program and improve the clarity of the resulting plots to greatly improve readability and overall quality.
 
 ## Authors and Acknowledgment
 
