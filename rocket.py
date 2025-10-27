@@ -1,11 +1,9 @@
 from constants import *
 from plot import plot_simple
-import numpy as np
 
 wet_mass = M_0_LV
 dry_mass = M_0_LV/MASS_RATIO_LV
 burn_time = (wet_mass - dry_mass)/M_DOT_E_LV
-
 
 def thrust(t):
     if t <= burn_time:
@@ -45,7 +43,7 @@ def approx(sim_time, t_step, h_0, v_0):
     h_plot[0] = h_0
     v_plot[0] = v_0
 
-    for i in range(0, len(t_plot)):
+    for i in range(1, len(t_plot)):
         v_plot[i] = v + t_step*a(t, h, v)
         v = v_plot[i]
         h_plot[i] = h + t_step*v
@@ -53,27 +51,27 @@ def approx(sim_time, t_step, h_0, v_0):
         t_plot[i] = t_plot[i-1] + t_step
         t += t_step
 
-        if h <= 0 and t > 0:
+        if h <= 0 and t > 0 or i == len(t_plot):
             h_plot[i] = 0
             v_plot[i] = v
-            t_plot = t_plot[:i-110]
-            h_plot = h_plot[:i-110]
-            v_plot = v_plot[:i-110]
+            t_plot = t_plot[:i-1]
+            h_plot = h_plot[:i-1]
+            v_plot = v_plot[:i-1]
             break
-    return t_plot, h_plot, v_plot
+    return t_plot, h_plot, v_plot, max(h_plot)
     
 
 def main():
     # TODO: write me
-    sim_time = 20*burn_time
+    sim_time = 80*burn_time
     t_step = 0.1
     h_0 = 0
     v_0 = 0
-    time, height, velocity = approx(sim_time, t_step, h_0, v_0)
+    time, height, velocity, max = approx(sim_time, t_step, h_0, v_0)
     plot_simple(time, height)
-    plot_simple(time, velocity)
-    print(f"the maximum height is {round(max(height), 3)}m")
-    print(f"the maximum velocity is {round(max(velocity), 3)}m/s")
+    #plot_simple(time, velocity)
+    
+    
 
 if __name__ == '__main__':
     main()
