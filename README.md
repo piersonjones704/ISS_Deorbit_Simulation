@@ -87,5 +87,5 @@ Describe why the output is correct or how you know there are errors and what you
 What features do you plan to contribute in Phase 2?
 
 ## Authors and Acknowledgment
+Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
 
-Show your appreciation to those who have contributed to the project.
