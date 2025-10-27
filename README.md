@@ -84,5 +84,5 @@ Describe why the output is correct or how you know there are errors and what you
 In Phase 2 we plan to combine the programs from the four individual stage of the deorbit process into one cohesive program that remains highly responsive to changes in forces, conditions, and other external variables. Additionally, we aim to refine the program and improve the clarity of the resulting plots to greatly improve readability and overall quality.
 
 ## Authors and Acknowledgment
+Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
 
-Show your appreciation to those who have contributed to the project.
