@@ -53,7 +53,13 @@ At the end of the simulation the program returns a list of the x-positions, y-po
 
 the program allows user to simulate the final burn of the phase of the rocket, plotting the x and y coordinates for the iss, some inputs value are recquired for the simulation to be optimal, altitude of the iss, the initial velocity of which the rocket is travling and how long the simulation will last is recquired. 
 
-altitude: this is the height of the iss, which the altitude + the radius of the earth is the initial 
+altitude: this is the height of the iss, which the altitude + the radius of the earth is the initial y coordinate of the ISS
+
+velocity: this is the speed at which the iss is travelling in tangent to the earth, or in simple terms, the linear component of the orbital speed of the ISS, which is denoted as the initial speed in the x direction
+
+time: this is an indicator on how long the  simulation will last, measured in minutes.
+
+the output of the simulation will display the orbital path of the ISS on a x-y coordinate map, allowing the user to visualize the process of the final burn of the ISS.
 
 ### [Role 3] - Reentry Trajectory
 
