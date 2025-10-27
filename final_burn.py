@@ -40,7 +40,7 @@ def final_burn(altitude, velocity, time_minutes):
         else:
             vx_unit, vy_unit = vx / v, vy / v
 
-        # Drag and thrust (opposite velocity)
+        # Drag and thrust 
         drag = -0.5 * rho * Cd * A * v**2
         drag_x = drag * vx_unit
         drag_y = drag * vy_unit
@@ -66,3 +66,5 @@ def final_burn(altitude, velocity, time_minutes):
 
 if __name__ == '__main__':
     final_burn(220000, 7770, 60)
+    final_burn(100000, 6000, 70)
+    final_burn(50000, 10000, 120)

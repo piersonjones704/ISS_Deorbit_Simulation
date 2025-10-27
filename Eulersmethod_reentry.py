@@ -1,7 +1,7 @@
 import math
-import matplotlib.pyplot as plt
 from constants import R_EARTH, G, M_EARTH
-from plot import plot_position_earth
+from reentry import initial_altitude, input_units, x_initial_velocity, y_initial_velocity
+
 
 def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
     # Set variables
@@ -46,14 +46,12 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
 if __name__ == '__main__': 
     # Import unit conversions for test cases of different initial units
     from ReentryUnits import unit_converter_initialaltitude
-    y0 = unit_converter_initialaltitude()
+    y0 = unit_converter_initialaltitude(initial_altitude, input_units, output_unit = 'm')
     x0 = 0.0 
     time = 0
     tstep = 0.1
     max_steps = 100000
-    x_initial_velocity = 7800
     vx0 = x_initial_velocity
-    y_initial_velocity = 0
     vy0 = y_initial_velocity
     mu = G * M_EARTH
     ts, xs, ys, vxs, vys = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)

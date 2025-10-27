@@ -1,6 +1,6 @@
 # Our Super Awesome Project - ISS Deorbit Project
 
-# Live Document Links
+## Live Document Links
 Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2rmjjUFR3-em32RshCD2co25l5qMrgn1TTljqvA/edit?usp=sharing)
 
 ## Description
@@ -40,15 +40,37 @@ Let people know what your project can do specifically.
 
 ### [Role 1] - Orbital Decay
 
-How to run team member's program. How to input data and what kind of output to expect.
+The use of the program requires the input of an initial altitude, velocity, and the length of simualtion. The order of input is as follows:
+* Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
+* Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
+* Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
+
+Note: The example of the orbital_decay program has an initial altitude of 400 km, velocity of 7670 m/s, and runs for 90 minutes.
+
+At the end of the simulation the program returns a list of the x-positions, y-positions, x-velocities, y-velocities, and time, for each iteration of the simulation. Additionally, it creates a plot of the x and y positions of the station. 
 
 ### [Role 2] - Final Burn
 
-How to run team member's program. How to input data and what kind of output to expect.
+the program allows user to simulate the final burn of the phase of the rocket, plotting the x and y coordinates for the iss, some inputs value are recquired for the simulation to be optimal, altitude of the iss, the initial velocity of which the rocket is travling and how long the simulation will last is recquired. 
+
+altitude: this is the height of the iss, which the altitude + the radius of the earth is the initial 
 
 ### [Role 3] - Reentry Trajectory
 
-How to run team member's program. How to input data and what kind of output to expect.
+Upon providing the initial altitude and x- and y-velocity parameters, this program is ran by pressing the play button while in the "reentry.py" file. 
+
+For this milestone, the reentry trajectory and simulation depend entirly on the initial altitude and initial x and y velocity. Data can be input by altering the initial altitude and its units, and the initial velocity parameters in the "reentry.py" file. Ensure that after altering the parameters, the data is saved. These parameters appear as follows:
+* Initial altitude = 130 
+* Input units = 'km'
+* Initial x-velocity = 7800 m/s 
+* Initial y-velocity = 0 m/s 
+
+In regards to the output, the simulation should output time, position, and velocity as list data types. It should also plot the x- and y- position of the mass. In this section these assumptions should be made:
+- Drag is negligible.
+- The ISS and deorbit vehicle remain docked for the duration of the descent.
+- The simulation stops when the mass reaches zero altitude.
+It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
+
 
 ### [Role 4] - Rocket Trajectory
 
