@@ -73,11 +73,10 @@ It will be apparent that the program ran succesfully if it outputs eveything pre
 ### [Role 4] - Rocket Trajectory
 
 Given standard rocket parameters, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
+
 ## Testing
 
-Describe what test cases you are providing with your project and how to run them.
-
-Describe why the output is correct or how you know there are errors and what you plan to do in Phase 2 to address them.
+To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. w
 
 ## Roadmap
 
