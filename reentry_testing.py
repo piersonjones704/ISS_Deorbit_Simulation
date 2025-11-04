@@ -2,7 +2,7 @@
 
 def do_test(y0, input_unit, vx0, vy0, tstep, expected_status, max_steps = 100000):
     x0 = 0
-    from Eulersmethod_reentry import second_order_ex
+    from reentry import second_order_ex
     ts, xs, ys, vxs, vys, status, = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     if status == expected_status:
         print('Test Passed', expected_status)
