@@ -5,13 +5,9 @@ Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2
 
 ## Description
 
-What problem are you solving? 
-
 Nasa plans to address the issue that the ISS is reaching the end of its working lifetime. The chosen solution is to plan a safe, controlled re-entry of the spacecraft, however, NASA needs to simulate this re-entry. We strive to solve this problem through simulating the reentry in 4 phases. 
 
 ### Background
-
-What is the context for your project? What are the scientific principles behind your project?
 
 Due to the constant dynamic loads and thermal changes that the ISS faces, its constituent components, including modules, radiators, and truss structures, have a limited technical lifetime. As the working lifetime of these components comes to an end, NASA must consider what to do with the ISS. Possible options include disassembly and return to Earth, boosting to higher orbit, natural orbital decay with random re-entry, and controlled targeted re-entry. NASA has determined that the safest and most cost-effective plan is to conduct a controlled, targeted re-entry into a remote ocean area. This method strikes a good balance between cost-effectiveness and safety: it avoids the large propellant requirements of orbital boosting or disassembly and return, while intentional control of the deorbit location drastically reduces the risk of collision with infrastructure and people. Our project strives to simulate the controlled, targeted reentry of the ISS through 4 phases, orbital decay, final burn, re-entry trajectory, and rocket trajectory. We will be utilizing a numerical simulation for this project. This is a computational approach that approximates the behavior of complex systems using numerical methods and mathematical models. It allows us to study equations and physical systems that are too complex for exact analytical solutions. Euler’s method is a foundational technique that will be integrated in this simulation. This technique is used to solve ordinary differential equations. It works by using the tangent at a known point to estimate the value of the function at the next point, gradually replacing the curve with a straight-line approximation.
 [Source](https://www.3d-scantech.com/solution/numerical-simulation/)
@@ -51,7 +47,7 @@ At the end of the simulation the program returns a list of the x-positions, y-po
 
 ### [Role 2] - Final Burn
 
-the program allows user to simulate the final burn of the phase of the rocket, plotting the x and y coordinates for the iss, some inputs value are recquired for the simulation to be optimal, altitude of the iss, the initial velocity of which the rocket is travling and how long the simulation will last is recquired. 
+The program allows user to simulate the final burn of the phase of the rocket, plotting the x and y coordinates for the iss, some inputs value are recquired for the simulation to be optimal, altitude of the iss, the initial velocity of which the rocket is travling and how long the simulation will last is recquired. 
 
 altitude: this is the height of the iss, which the altitude + the radius of the earth is the initial y coordinate of the ISS
 
@@ -90,5 +86,5 @@ To develop test cases for our programs we decided to write several cases with in
 In Phase 2 we plan to combine the programs from the four individual stage of the deorbit process into one cohesive program that remains highly responsive to changes in forces, conditions, and other external variables. Additionally, we aim to refine the program and improve the clarity of the resulting plots to greatly improve readability and overall quality.
 
 ## Authors and Acknowledgment
-Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
 
+Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
