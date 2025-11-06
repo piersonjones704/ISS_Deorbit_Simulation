@@ -4,26 +4,27 @@ from plot import plot_position_earth
 
 # Parameters
 initial_altitude = 130
-input_units = 'km'
+input_unit = 'km'
 x_initial_velocity = 7800
 y_initial_velocity = 0
 
-def unit_converter_initialaltitude(initial_altitude, input_units, output_unit = 'm'):
-    unit_conversion = initial_altitude_conversion_process(initial_altitude, input_units, output_unit)
+# Convert all input units for the initial altitude into meters.
+def unit_converter_initialaltitude(initial_altitude, input_unit):
+    unit_conversion = initial_altitude_conversion_process(initial_altitude, input_unit)
     y0 = unit_conversion
     return(y0) 
 
-def initial_altitude_conversion_process(initial_altitude, input_unit, output_unit):
+def initial_altitude_conversion_process(initial_altitude, input_unit):
     y = initial_altitude
-    if input_unit == 'km' and output_unit == 'm':
+    if input_unit == 'km':
         y = y * 10**3
-    elif input_unit == 'm' and output_unit == 'm':
+    elif input_unit == 'm':
         y = y
-    elif input_unit == 'miles' and output_unit == 'm':
+    elif input_unit == 'miles':
         y = y * 1609.344
-    elif input_unit == 'ft' and output_unit == 'm':
+    elif input_unit == 'ft':
         y = y * 0.3048
-    elif input_unit == 'cm' and output_unit == 'm':
+    elif input_unit == 'cm':
         y = y * 10**(-2)
     return y
 
@@ -69,9 +70,9 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
     return t_list, x_list, y_list, vx_list, vy_list, status
 
 # call euler simulation function with initial y, end time, and time step
-def main(x0, y0, vx0, vy0, tstep):
+def main(tstep, max_steps):
     # Unit conversion function for cases with different initial units
-    y0 = unit_converter_initialaltitude(initial_altitude, input_units, output_unit)
+    y0 = unit_converter_initialaltitude(initial_altitude, input_unit)
     ts, x, y, vxs, vys, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     print(ts, x, y, vxs, vys)
     plot = plot_position_earth(x, y)
@@ -84,11 +85,6 @@ if __name__ == '__main__':
     time = 0
     tstep = 0.1
     max_steps = 10000
-    mu = G * M_EARTH
     x0 = 0.0
-    y0 = 0
-    x = 0
-    y = 0
-    output_unit = 'm' 
-    main(x0, y0, vx0, vy0, tstep)
+    main(tstep, max_steps)
     
