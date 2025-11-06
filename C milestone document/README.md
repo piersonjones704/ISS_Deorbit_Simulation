@@ -73,15 +73,10 @@ In regards to the output, the simulation should output time, position, and veloc
 - The simulation stops when the mass reaches zero altitude.
 It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
 
-
 ### [Role 4] - Rocket Trajectory
 
-<<<<<<< HEAD
-Given standard rocket parameters, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
-
-=======
 Given standard rocket parameters, and initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
->>>>>>> 8af834278ef459a3c91e66d169920d6b16b47b2c
+
 ## Testing
 
 To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. w
