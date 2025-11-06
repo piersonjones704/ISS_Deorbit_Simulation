@@ -72,27 +72,23 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
 
 # call euler simulation function with initial y, end time, and time step
 def main(x0, y0, vx0, vy0, tstep):
+    # Unit conversion function for cases with different initial units
     y0 = unit_converter_initialaltitude(initial_altitude, input_units, output_unit)
-    ts, xs, ys, vxs, vys, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
-    print(ts, xs, ys, vxs, vys)
-    plot = plot_position_earth(xs, ys)
+    ts, x, y, vxs, vys, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
+    print(ts, x, y, vxs, vys)
+    plot = plot_position_earth(x, y)
     return plot, status
 
 if __name__ == '__main__':
     vx0 = x_initial_velocity
     vy0 = y_initial_velocity
     time = 0
-    tstep = 0.1
-    max_steps = 100000
+    tstep = 100
+    max_steps = 100
     mu = G * M_EARTH
     x0 = 0.0
     y0 = 0
-    xs = 0
-    ys = 0
+    x = 0
+    y = 0
     output_unit = 'm' 
-    # Unit conversion function for cases with different initial units
-    initial_altitude_conversion_process(initial_altitude, input_units, output_unit)
-    unit_converter_initialaltitude(initial_altitude, input_units, output_unit)
-    second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     main(x0, y0, vx0, vy0, tstep)
-    plot_position_earth(xs, ys)
