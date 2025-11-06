@@ -12,7 +12,6 @@ def unit_converter_initialaltitude(initial_altitude, input_units, output_unit = 
     unit_conversion = initial_altitude_conversion_process(initial_altitude, input_units, output_unit)
     y0 = unit_conversion
     return(y0) 
-    
 
 def initial_altitude_conversion_process(initial_altitude, input_unit, output_unit):
     y = initial_altitude
@@ -54,8 +53,8 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
             return t_list, x_list, y_list, vx_list, vy_list, status
         # Update x for each step
         else:
-            ax = -mu * x / r**3
-            ay = -mu * y / r**3
+            ax = -mu * x /(R_EARTH**2*r)
+            ay = -mu * y /(R_EARTH**2*r)
             vx = vx + ax * (tstep)
             vy = vy + ay * (tstep)
             x = x + vx * (tstep)
@@ -69,7 +68,6 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
         status = 'orbiting or escaped orbit'
     return t_list, x_list, y_list, vx_list, vy_list, status
 
-
 # call euler simulation function with initial y, end time, and time step
 def main(x0, y0, vx0, vy0, tstep):
     # Unit conversion function for cases with different initial units
@@ -79,12 +77,13 @@ def main(x0, y0, vx0, vy0, tstep):
     plot = plot_position_earth(x, y)
     return plot, status
 
+
 if __name__ == '__main__':
     vx0 = x_initial_velocity
     vy0 = y_initial_velocity
     time = 0
-    tstep = 100
-    max_steps = 100
+    tstep = 0.1
+    max_steps = 10000
     mu = G * M_EARTH
     x0 = 0.0
     y0 = 0
@@ -92,3 +91,4 @@ if __name__ == '__main__':
     y = 0
     output_unit = 'm' 
     main(x0, y0, vx0, vy0, tstep)
+    
