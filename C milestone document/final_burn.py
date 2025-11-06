@@ -66,5 +66,3 @@ def final_burn(altitude, velocity, time_minutes):
 
 if __name__ == '__main__':
     final_burn(220000, 7770, 60)
-    final_burn(100000, 6000, 70)
-    final_burn(50000, 10000, 120)
