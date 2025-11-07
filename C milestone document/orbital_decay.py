@@ -44,15 +44,45 @@ def orbital_decay(altitude, velocity, time):
 
 def main():
     # TODO: write me
-    orbital_decay(400,7670,90)
+    #This is the given initial conditions and parameters
+    ##orbital_decay(400,7670,90)
 
-    #Cases that hit the ground
-    orbital_decay(400,7070,90)
-    orbital_decay(100,7670,90)
+#Comprehensive tests that provide complete coverage, Path coverage, checks proper fails and successes
+    #Cases that fail, changes in initial velocity
+   ## orbital_decay(400,7000,90)
+    ##orbital_decay(400,7070,90)
+    ##orbital_decay(400,7500,90)
+    ##orbital_decay(400,7520,90)
 
-    #Cases that work
-    orbital_decay(300,7670,90)
+
+    #Cases that fail, changes in initial altitude
+  ##  orbital_decay(0,7670,90)
+   ## orbital_decay(100,7670,90)
+   ## orbital_decay(200,7670,90)
+   ## orbital_decay(250,7670,90)
+
+    #Cases that fail, slight changes to altitude and velocity
+   ## orbital_decay(275,7600,90)    
+    ##orbital_decay(300,7620,90)
+   ## orbital_decay(350,7580,90)
+
+    #Cases that succeed, changes in altitude
+   ## orbital_decay(450,7670,90)
+   ## orbital_decay(500,7670,90)
+   ## orbital_decay(1000,7620,90)
+
+    #Cases that succeed, changes in velocity
+##orbital_decay(400,7700,90)
+## orbital_decay(400,8000,90)
+## orbital_decay(400,8500,90)
+
+    #Cases that succeed, slight changes to altitude and velocity
     orbital_decay(300,8000,90)
+    orbital_decay(350,8300,90)
+      ##Time has been changed here to allow full orbit to be seen   
+    orbital_decay(200,9000,1000)
+
+
 
 
 
