@@ -25,7 +25,7 @@ def m(t):
         return dry_mass  
     
 def grav_force(t, h):
-    return (G*M_EARTH*m(t))/(R_EARTH + h)**2
+    return m(t)*g_0
 
 def a(t, h, v):
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
@@ -63,11 +63,12 @@ def approx(sim_time, t_step, h_0, v_0):
 
 def main():
     # TODO: write me
-    sim_time = 80*burn_time
+    sim_time = 8*burn_time
     t_step = 0.1
     h_0 = 0
     v_0 = 0
     time, height, velocity, max = approx(sim_time, t_step, h_0, v_0)
+    print(max)
     plot_simple(time, height)
     #plot_simple(time, velocity)
     

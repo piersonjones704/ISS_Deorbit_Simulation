@@ -5,13 +5,9 @@ Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2
 
 ## Description
 
-What problem are you solving? 
-
 Nasa plans to address the issue that the ISS is reaching the end of its working lifetime. The chosen solution is to plan a safe, controlled re-entry of the spacecraft, however, NASA needs to simulate this re-entry. We strive to solve this problem through simulating the reentry in 4 phases. 
 
 ### Background
-
-What is the context for your project? What are the scientific principles behind your project?
 
 Due to the constant dynamic loads and thermal changes that the ISS faces, its constituent components, including modules, radiators, and truss structures, have a limited technical lifetime. As the working lifetime of these components comes to an end, NASA must consider what to do with the ISS. Possible options include disassembly and return to Earth, boosting to higher orbit, natural orbital decay with random re-entry, and controlled targeted re-entry. NASA has determined that the safest and most cost-effective plan is to conduct a controlled, targeted re-entry into a remote ocean area. This method strikes a good balance between cost-effectiveness and safety: it avoids the large propellant requirements of orbital boosting or disassembly and return, while intentional control of the deorbit location drastically reduces the risk of collision with infrastructure and people. Our project strives to simulate the controlled, targeted reentry of the ISS through 4 phases, orbital decay, final burn, re-entry trajectory, and rocket trajectory. We will be utilizing a numerical simulation for this project. This is a computational approach that approximates the behavior of complex systems using numerical methods and mathematical models. It allows us to study equations and physical systems that are too complex for exact analytical solutions. Euler’s method is a foundational technique that will be integrated in this simulation. This technique is used to solve ordinary differential equations. It works by using the tangent at a known point to estimate the value of the function at the next point, gradually replacing the curve with a straight-line approximation.
 [Source](https://www.3d-scantech.com/solution/numerical-simulation/)
@@ -77,15 +73,10 @@ In regards to the output, the simulation should output time, position, and veloc
 - The simulation stops when the mass reaches zero altitude.
 It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
 
-
 ### [Role 4] - Rocket Trajectory
 
-<<<<<<< HEAD
-Given standard rocket parameters, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
-
-=======
 Given standard rocket parameters, and initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
->>>>>>> 8af834278ef459a3c91e66d169920d6b16b47b2c
+
 ## Testing
 
 To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. w
