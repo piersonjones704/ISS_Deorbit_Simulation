@@ -79,11 +79,11 @@ Given standard rocket parameters, and initial height, and an initial velocity, t
 
 ## Testing
 
-# Orbital Decay testing:
+### Orbital Decay testing:
 
-# Final Burn testing:
+### Final Burn testing:
 
-# Reentry testing:
+### Reentry testing:
 The reentry testing file checks the major components of the ISS reentry simulation, including unit conversions, how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based off the inputs. The file "test_reentry.py" is what executes the testing, printing "Test Passed" with the expected output, or "Test Failed" with the expected output and actual output. The provided tests in the file cover:
 - ISS orbit and impact behavior: verifies using an expected outcome for different initial altitudes, velocities, and directions.
 - Unit conversions: kilometers, meters, centimeters, feet, miles, and invalid unit inputs
@@ -94,9 +94,9 @@ To know a testing function output is correct the output line should state, "Test
 
 In Phase 2 for this simulation component, it may be beneficial to update the main() function to check the simulator's "status" before plotting to prevent the output of meaningless data. Additionally, setting the status strings as constants at the top of the file could minimize accidental typos between the code and test file. Regarding the function's output, it would be useful to create  means of distinguishing between the ISS maintaining orbit and it escaping orbit, currently they are grouped as one status rather than two. The function could also be improved to simulate actual physics, with an updated Eulers method that adjusts gravity's influence based off the ISS's position/altitude.
 
-# Rocket Trajectory testing:
+### Rocket Trajectory testing:
 
-# Previous testing overview (could be removed)
+### Previous testing overview (could be removed)
 To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. 
 
 ## Roadmap
