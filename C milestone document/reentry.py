@@ -12,7 +12,12 @@ y_initial_velocity = 0
 def unit_converter_initialaltitude(initial_altitude, input_unit):
     unit_conversion = initial_altitude_conversion_process(initial_altitude, input_unit)
     y0 = unit_conversion
-    return(y0) 
+    if y0 == None:
+        status = 'unit converter error'
+        return status, y0
+    else:
+        status = 'unit conversion complete'
+        return status, y0 
 
 def initial_altitude_conversion_process(initial_altitude, input_unit):
     y = initial_altitude
@@ -26,9 +31,23 @@ def initial_altitude_conversion_process(initial_altitude, input_unit):
         y = y * 0.3048
     elif input_unit == 'cm':
         y = y * 10**(-2)
+    else:
+        return None
     return y
 
 def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
+    if tstep <= 0 and max_steps < 0: 
+        status = 'invalid tstep and max_steps values'
+        return [], [], [], [], [], status
+    elif max_steps < 0:
+        status = 'invalid max_steps value'
+        return [], [], [], [], [], status
+    elif max_steps == 0:
+        status = 'orbiting or escaped orbit'     
+        return [], [], [], [], [], status
+    elif tstep <= 0:  
+        status = 'invalid tstep value'
+        return [], [], [], [], [], status
     # Set variables
     t = 0.0
     x = x0
@@ -43,6 +62,7 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
     vy_list = [vy]
     # Calculate gravitational constant
     mu = G * M_EARTH
+    status = ''
     for i in range(max_steps):
         # Set distance from Earth's center
         r = math.sqrt(x*x + y*y)
@@ -50,7 +70,7 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
         altitude = r - R_EARTH
         # End the function when the mass hits the ground
         if altitude <= 0:
-            status = 'hit_ground'
+            status = 'hit ground'
             return t_list, x_list, y_list, vx_list, vy_list, status
         # Update x for each step
         else:
@@ -72,7 +92,9 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
 # call euler simulation function with initial y, end time, and time step
 def main(tstep, max_steps):
     # Unit conversion function for cases with different initial units
-    y0 = unit_converter_initialaltitude(initial_altitude, input_unit)
+    status, y0 = unit_converter_initialaltitude(initial_altitude, input_unit)
+    if y0 is None:
+        return status
     ts, x, y, vxs, vys, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     print(ts, x, y, vxs, vys)
     plot = plot_position_earth(x, y)
@@ -82,9 +104,9 @@ def main(tstep, max_steps):
 if __name__ == '__main__':
     vx0 = x_initial_velocity
     vy0 = y_initial_velocity
-    time = 0
     tstep = 0.1
     max_steps = 10000
     x0 = 0.0
+    y0 = None
     main(tstep, max_steps)
     
