@@ -95,9 +95,9 @@ To know a testing function output is correct the output line should state, "Test
 In Phase 2 for this simulation component, it may be beneficial to update the main() function to check the simulator's "status" before plotting to prevent the output of meaningless data. Additionally, setting the status strings as constants at the top of the file could minimize accidental typos between the code and test file. Regarding the function's output, it would be useful to create  means of distinguishing between the ISS maintaining orbit and it escaping orbit, currently they are grouped as one status rather than two. The function could also be improved to simulate actual physics, with an updated Eulers method that adjusts gravity's influence based off the ISS's position/altitude.
 
 ### Rocket Trajectory testing:
-
+To test the simulated rocket trajectory, the initial velocity and initial height were both set to zero (the provided initial conditions). Then, the trajectory was evaluated by looking at the slope of the graph and how its magnitude and direction changed with time. 
 ### Previous testing overview (could be removed)
-To develop test cases for our programs we decided to write several cases with inputs that would lead to the simulation fail to reach what is desired as a successful result. This meant creating multiple test cases in which all inputs would be given a value that leads to 'failure.' In addition to this we created a number of test cases that would cause the simulation to reach the desired result. All together this system allowed us to guarantee that the calculations were being done correctly for each program. 
+Testing our programs was an extremely involved process that required significant research to develop the domain knowledge necessary for creating effective test cases. Through this research and several calculations, we developed a series of cases that differed only by the values of a single variable to isolate its effect on the program’s output. We created successful and failing test cases to verify the program’s behavior and ensure that it handled all conditions correctly. Additionally, we focused on achieving  path coverage by designing our tests to ensure they exercised every possible execution path, allowing us to validate the logic and reliability of the code under all scenarios.
 
 ## Roadmap
 
