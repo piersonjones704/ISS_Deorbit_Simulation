@@ -1,6 +1,7 @@
 from constants import *
 from plot import plot_position_earth
 import math
+import numpy as np
 
 def final_burn(altitude, velocity, time_minutes):
     # Constants
@@ -13,56 +14,47 @@ def final_burn(altitude, velocity, time_minutes):
 
     # Initial conditions
     R = R_EARTH + altitude
-    x = R
-    y = 0.0
-    vx = 0.0
-    vy = velocity
+    pos = np.array([R, 0.0])
+    vel = np.array([0.0, velocity])
 
     dt = 1.0
     total_time = time_minutes * 60
     interval = int(total_time / dt)
 
-    x_list, y_list = [], []
+    positions = np.zeros((2, interval))
 
     for i in range(interval):
         
-        r = math.sqrt(x**2 + y**2)
-        ux, uy = x / r, y / r
+        r = np.linalg.norm(pos)
+        u = pos / r
 
         
-        g_x = -g * ux
-        g_y = -g * uy
+        g_mag = G * M_EARTH / r**2
+        g_vec = -g_mag * u
 
         # Velocity magnitude and direction
-        v = math.sqrt(vx**2 + vy**2)
+        v = np.linalg.norm(vel)
         if v == 0:
-            vx_unit, vy_unit = 0, 0
+            v_unit = np.zeros(2)
         else:
-            vx_unit, vy_unit = vx / v, vy / v
+            v_unit = vel / v
 
         # Drag and thrust 
-        drag = -0.5 * rho * Cd * A * v**2
-        drag_x = drag * vx_unit
-        drag_y = drag * vy_unit
-        thrust_x = -thrust * vx_unit
-        thrust_y = -thrust * vy_unit
+        drag = -0.5 * rho * Cd * A * v**2 * v_unit
+        thrust_vec = -thrust * v_unit
 
         # vertical and horizontal accelaration
-        ax = g_x + (drag_x + thrust_x) / m
-        ay = g_y + (drag_y + thrust_y) / m
+        acc = g_vec + (drag + thrust_vec) / m
 
         # motion
-        vx += ax * dt
-        vy += ay * dt
-        x += vx * dt
-        y += vy * dt
-
-        x_list.append(x)
-        y_list.append(y)
+        vel += acc * dt
+        pos += vel * dt
+        
+        positions[:, i] = pos
 
     # Plot results
-    plot_position_earth(x_list, y_list)
-    return x_list, y_list
+    plot_position_earth(positions[0], positions[1])
+    return positions[0], positions[1]
 
 if __name__ == '__main__':
     final_burn(220000, 7770, 60)
