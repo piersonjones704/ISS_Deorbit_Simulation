@@ -82,7 +82,7 @@ Given standard rocket parameters, and initial height, and an initial velocity, t
 ### Orbital Decay testing:
 
 ### Final Burn testing:
-for testing in the final burn phase, I ran two test cases that would achieve statement coverage and decision coverage, as there is one if statement and a for loop, providing two test cases
+Testing this final_burn function should achieve validity in different inputs, returns properly sized coordinate lists, and produces physically consistent motion. Numerical stability should be checked with smaller timesteps and longer runs, and boundary cases (zero velocity, zero time, extreme altitude) must not produce invalid values. For coverage, statement coverage is achieved by running inputs that execute every line at least once, decision coverage by ensuring both outcomes of conditions like v == 0 are exercised, and path coverage by using varied scenarios—orbital-speed starts, rest starts, and decaying trajectories—to drive the simulation through different combinations of drag, thrust, and gravitational effects.
 
 ### Reentry testing:
 The reentry testing file checks the major components of the ISS reentry simulation, including unit conversions, how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based off the inputs. The file "test_reentry.py" is what executes the testing, printing "Test Passed" with the expected output, or "Test Failed" with the expected output and actual output. The provided tests in the file cover:
@@ -97,7 +97,8 @@ In Phase 2 for this simulation component, it may be beneficial to update the mai
 
 ### Rocket Trajectory testing:
 To test the simulated rocket trajectory, the initial velocity and initial height were both set to zero (the provided initial conditions). Then, the trajectory was evaluated by looking at the slope of the graph and how its magnitude and direction changed with time. 
-### Previous testing overview (could be removed)
+
+### Previous testing overview
 Testing our programs was an extremely involved process that required significant research to develop the domain knowledge necessary for creating effective test cases. Through this research and several calculations, we developed a series of cases that differed only by the values of a single variable to isolate its effect on the program’s output. We created successful and failing test cases to verify the program’s behavior and ensure that it handled all conditions correctly. Additionally, we focused on achieving  path coverage by designing our tests to ensure they exercised every possible execution path, allowing us to validate the logic and reliability of the code under all scenarios.
 
 ## Roadmap
