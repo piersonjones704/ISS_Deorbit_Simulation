@@ -82,7 +82,7 @@ Given standard rocket parameters, and initial height, and an initial velocity, t
 ### Orbital Decay testing:
 
 ### Final Burn testing:
-for testing in the final burn phase, I ran two test cases that would achieve statement coverage and decision coverage, as there is one if statement and a for loop, providing two test cases
+Testing this final_burn function should achieve validity in different inputs, returns properly sized coordinate lists, and produces physically consistent motion. Numerical stability should be checked with smaller timesteps and longer runs, and boundary cases (zero velocity, zero time, extreme altitude) must not produce invalid values. For coverage, statement coverage is achieved by running inputs that execute every line at least once, decision coverage by ensuring both outcomes of conditions like v == 0 are exercised, and path coverage by using varied scenarios—orbital-speed starts, rest starts, and decaying trajectories—to drive the simulation through different combinations of drag, thrust, and gravitational effects.
 
 ### Reentry testing:
 The reentry testing file checks the major components of the ISS reentry simulation, including unit conversions, how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based off the inputs. The file "test_reentry.py" is what executes the testing, printing "Test Passed" with the expected output, or "Test Failed" with the expected output and actual output. The provided tests in the file cover:
