@@ -62,7 +62,7 @@ def final_burn(altitude, velocity, time_minutes):
 
 
     # Plot results
-    plot_position_earth(positions[:, 0], positions[:, 1])
+    # plot_position_earth(positions[:, 0], positions[:, 1])
     status = 'orbiting or escaped orbit'
     return positions, velocities, times, status
     
