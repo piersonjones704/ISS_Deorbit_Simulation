@@ -73,11 +73,16 @@ def orbital_decay(y0, starting_velo, sim_time):
 
         t += dt
         if r <= R_EARTH: 
-            break
+            status = 'hit ground'
+            varray = np.column_stack((vx_val,vy_val))
+            posarray = np.column_stack((x_val,y_val))
+            tarray = np.array(t_val)
+            return varray, posarray, tarray, status
     varray = np.column_stack((vx_val,vy_val))
     posarray = np.column_stack((x_val,y_val))
     tarray = np.array(t_val)
-    return varray, posarray, t_val
+    status = 'orbiting or escaped orbit'
+    return varray, posarray, tarray, status
 
 def orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time):
     # Unit conversion function:
@@ -85,11 +90,11 @@ def orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time):
     if y0 == None:
         return None, None, None, status
     #This is the given initial conditions and parameters
-    varray, posarray, t_val = orbital_decay(y0, starting_velo, sim_time)
+    varray, posarray, tarray, status = orbital_decay(y0, starting_velo, sim_time)
     # plot_position_earth(posarray[:,0],posarray[:,1])
     # print(posarray[-1,1]-R_EARTH)
-    return posarray, varray, t_val, status
+    return posarray, varray, tarray, status
     
 
-# if __name__ == '__main__':
-#     orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time)
+if __name__ == '__main__':
+    orbital_decay_main(275, 'km', 7700, 90)
