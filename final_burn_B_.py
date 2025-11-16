@@ -12,9 +12,8 @@ def final_burn(altitude, velocity, time_minutes):
     rho = 3.8e-12
 
     # Initial conditions
-    R = R_EARTH + altitude
-    pos = np.array([R, 0.0])
-    vel = np.array([0.0, velocity])
+    pos = altitude[-1, :]
+    vel = velocity[-1, :]
 
     dt = 1.0
     total_time = time_minutes * 60
@@ -64,15 +63,12 @@ def final_burn(altitude, velocity, time_minutes):
 
     # Plot results
     plot_position_earth(positions[:, 0], positions[:, 1])
-    print(positions)
-    print(velocities)
-    print(times)
     status = 'orbiting or escaped orbit'
     return positions, velocities, times, status
     
 
-if __name__ == '__main__':
-    final_burn(220000, 7770, 60)
+# if __name__ == '__main__':
+#     final_burn(220000, 7770, 60)
 
 
 
