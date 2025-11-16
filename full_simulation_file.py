@@ -2,8 +2,8 @@ from constants import *
 from plot import plot_simple, plot_position_earth
 import numpy as np
 import matplotlib.pyplot as plt
-from orbital_decay import orbital_decay_main
-from final_burn import final_burn
+from orbital_decay_B_ import orbital_decay_main
+from final_burn_B_ import final_burn
 from reentry_B_ import reentry
 
 def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch_rocket_altitude, initial_launch_rocket_velo, rocket_launch_sim_time):
