@@ -106,7 +106,7 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
     tarray = np.array(t_list)
     posarray = np.column_stack((x_list, y_list))
     varray = np.column_stack((vx_list, vy_list))
-    return tarray, posarray, varray, status
+    return posarray, varray, tarray, status
 
 # call euler simulation function with initial y, end time, and time step
 def reentry(pos2, velo2, tstep = 0.1, max_steps = 100000):
@@ -127,7 +127,7 @@ def reentry(pos2, velo2, tstep = 0.1, max_steps = 100000):
     #     return None, None, None, status
     pos, velo, ts, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     if pos is None:
-        return None, None, None, status
+        return None, None, None, status 
     return pos, velo, ts, status
     # plot = plot_position_earth(pos[:,0],pos[:,1])
     # return plot, status
