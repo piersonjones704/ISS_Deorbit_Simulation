@@ -1,4 +1,4 @@
-from reentry import unit_converter_initialaltitude, second_order_ex, main
+from reentry_C_ import unit_converter_initialaltitude, second_order_ex, main
 from constants import R_EARTH
 
 def do_test(y0, input_unit, vx0, vy0, tstep, expected_status, max_steps = 100000):

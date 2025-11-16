@@ -1,0 +1,95 @@
+from constants import *
+import numpy as np
+import math
+from plot import plot_position_earth
+
+# Convert all input units for the initial altitude into meters.
+def unit_converter_initialaltitude(starting_altitude, input_units):
+    y0 = initial_altitude_conversion_process(starting_altitude, input_units)
+    if y0 == None:
+        status = 'unit converter error'
+        return status, y0
+    else:
+        status = 'unit conversion complete'
+        return status, y0 
+
+def initial_altitude_conversion_process(starting_altitude, input_units):
+    y = starting_altitude
+    if input_units == 'km':
+        y = y * 10**3
+    elif input_units == 'm':
+        y = y
+    elif input_units == 'miles':
+        y = y * 1609.344
+    elif input_units == 'ft':
+        y = y * 0.3048
+    elif input_units == 'cm':
+        y = y * 10**(-2)
+    else:
+        return None
+    return y
+
+def orbital_decay(y0, starting_velo, sim_time):
+    # altitudem = starting_altitude * 1000
+    altitudem = y0
+    vx = starting_velo
+    vy = 0
+    x = 0
+    y = altitudem + R_EARTH
+    r = altitudem + R_EARTH
+    timetotal = sim_time * 60
+    dt = .1
+    t = 0
+
+    x_val = []
+    y_val = []
+    vy_val = []
+    vx_val = []
+    t_val = []
+    while t <= timetotal:
+        x_val.append(x)
+        y_val.append(y)
+        vy_val.append(vy)
+        vx_val.append(vx)
+        t_val.append(t)
+
+        r = math.sqrt(x**2+y**2)
+
+        Fg = -G*M_EARTH / r**2
+
+        altitudec = r-R_EARTH
+        vmag = math.sqrt(vx**2+vy**2)
+        rho = RHO_LEO*np.exp(-(altitudec/7500))
+        Fd = .5*rho*(vmag**2)*(C_D_ISS*AREA_ISS+C_D_TRUSS*AREA_TRUSS)
+        if vmag <= 0:
+            Fd = 0
+        ax = (Fg/r) * x - (Fd/(vmag*(M_ISS+M_TRUSS+M_DV))) * vx
+        ay = (Fg/r) * y - (Fd/(vmag*(M_ISS+M_TRUSS+M_DV))) * vy
+
+        vy += ay * dt
+        vx += ax *dt
+        x += vx * dt
+        y += vy * dt
+
+        t += dt
+        if r <= R_EARTH: 
+            break
+    varray = np.column_stack((vx_val,vy_val))
+    posarray = np.column_stack((x_val,y_val))
+    tarray = np.array(t_val)
+    return varray, posarray, t_val
+
+def orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time):
+    # Unit conversion function:
+    status, y0 = unit_converter_initialaltitude(starting_altitude, input_units)
+    if y0 == None:
+        return None, None, None, status
+    #This is the given initial conditions and parameters
+    varray, posarray, t_val = orbital_decay(y0, starting_velo, sim_time)
+    # plot_position_earth(posarray[:,0],posarray[:,1])
+    # print(posarray[-1,1]-R_EARTH)
+    return posarray, varray, t_val, status
+    
+
+# if __name__ == '__main__':
+#     orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time)
