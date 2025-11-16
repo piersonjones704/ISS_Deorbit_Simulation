@@ -19,8 +19,9 @@ def final_burn(altitude, velocity, time_minutes):
     dt = 1.0
     total_time = time_minutes * 60
     interval = int(total_time / dt)
-
-    positions = np.zeros((2, interval))
+    times = np.zeros(interval)
+    velocities = np.zeros((interval, 2))
+    positions = np.zeros((interval, 2))
 
     for i in range(interval):
         
@@ -48,15 +49,30 @@ def final_burn(altitude, velocity, time_minutes):
         # motion
         vel += acc * dt
         pos += vel * dt
+        times[i] = i * dt
         
-        positions[:, i] = pos
+        positions[i, :] = pos
+        velocities[i, :] = vel
+        r = np.linalg.norm(pos)
+        if r <= R_EARTH:
+            status = 'hit ground'
+            positions = positions[:i+1]
+            velocities = velocities[:i+1]
+            times = times[:i+1]
+            return positions, velocities, times, status
+
 
     # Plot results
-    plot_position_earth(positions[0], positions[1])
-    return positions[0], positions[1]
+    plot_position_earth(positions[:, 0], positions[:, 1])
+    print(positions)
+    print(velocities)
+    print(times)
+    status = 'orbiting or escaped orbit'
+    return positions, velocities, times, status
+    
 
 if __name__ == '__main__':
     final_burn(220000, 7770, 60)
-    final_burn(220000, 0, 60)
+
 
 
