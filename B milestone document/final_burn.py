@@ -9,7 +9,6 @@ def final_burn(altitude, velocity, time_minutes):
     Cd = 2.07
     A = 1000.0
     m = 480000.0
-    g = 9.1
     rho = 3.8e-12
 
     # Initial conditions
