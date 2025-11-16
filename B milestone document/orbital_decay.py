@@ -3,15 +3,41 @@ import numpy as np
 import math
 from plot import plot_position_earth
 
+# Convert all input units for the initial altitude into meters.
+def unit_converter_initialaltitude(starting_altitude, input_units):
+    y0 = initial_altitude_conversion_process(starting_altitude, input_units)
+    if y0 == None:
+        status = 'unit converter error'
+        return status, y0
+    else:
+        status = 'unit conversion complete'
+        return status, y0 
 
-def orbital_decay(altitude, velocity, time):
-    altitudem = altitude * 1000
-    vx = velocity
+def initial_altitude_conversion_process(starting_altitude, input_units):
+    y = starting_altitude
+    if input_units == 'km':
+        y = y * 10**3
+    elif input_units == 'm':
+        y = y
+    elif input_units == 'miles':
+        y = y * 1609.344
+    elif input_units == 'ft':
+        y = y * 0.3048
+    elif input_units == 'cm':
+        y = y * 10**(-2)
+    else:
+        return None
+    return y
+
+def orbital_decay(y0, starting_velo, sim_time):
+    # altitudem = starting_altitude * 1000
+    altitudem = y0
+    vx = starting_velo
     vy = 0
     x = 0
     y = altitudem + R_EARTH
     r = altitudem + R_EARTH
-    timetotal = time * 60
+    timetotal = sim_time * 60
     dt = .1
     t = 0
 
@@ -53,14 +79,17 @@ def orbital_decay(altitude, velocity, time):
     tarray = np.array(t_val)
     return varray, posarray, t_val
 
-def main():
-    # TODO: write me
+def orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time):
+    # Unit conversion function:
+    status, y0 = unit_converter_initialaltitude(starting_altitude, input_units)
+    if y0 == None:
+        return None, None, None, status
     #This is the given initial conditions and parameters
-    varray, posarray, t_val = orbital_decay(275,7700,90)
-    plot_position_earth(posarray[:,0],posarray[:,1])
-    print(posarray[-1,1]-R_EARTH)
-
+    varray, posarray, t_val = orbital_decay(y0, starting_velo, sim_time)
+    # plot_position_earth(posarray[:,0],posarray[:,1])
+    # print(posarray[-1,1]-R_EARTH)
+    return posarray, varray, t_val, status
     
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time)
