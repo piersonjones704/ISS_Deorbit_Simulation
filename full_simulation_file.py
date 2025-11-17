@@ -15,7 +15,7 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
         return status1
     elif status1 == 'hit ground':
         return status1
-    final_altitude_1 = np.abs(np.linalg.norm(pos1[-1]) - R_EARTH) / 1000
+    final_altitude_1 = np.abs((pos1[-1,1]) - R_EARTH) / 1000
     final_velocity_1 = np.linalg.norm(velo1[-1])
     print(f"Final altitude: {final_altitude_1:.2f} km")
     print(f"Final velocity: {final_velocity_1:.2f} m/s\n")
