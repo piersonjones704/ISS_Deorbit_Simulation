@@ -16,7 +16,7 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
         return status1
     elif status1 == 'hit ground':
         return status1
-    final_altitude_1 = np.abs((pos1[-1,1]) - R_EARTH) / 1000
+    final_altitude_1 = np.abs(np.linalg.norm(pos1[-1,1]) - R_EARTH) / 1000
     final_velocity_1 = np.linalg.norm(velo1[-1])
     print(f"Final altitude: {final_altitude_1:.2f} km")
     print(f"Final velocity: {final_velocity_1:.2f} m/s\n")
@@ -45,7 +45,7 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
 
     # Stage 4: Launch Vehicle Rocket
     print('ISS Deorbit Stage 4: Launch Vehicle Rocket')
-    pos4, velo4, ts4 = approx(rocket_launch_sim_time, t_step = 0.1, initial_rocket_launch_altitude, initial_rocket_launch_velo)
+    pos4, velo4, ts4 = approx(rocket_launch_sim_time, t_step, initial_rocket_launch_altitude, initial_rocket_launch_velo)
     final_altitude_4 = (np.linalg.norm(pos4[-1]) - R_EARTH) / 1000
     final_velocity_4 = np.linalg.norm(velo4[-1])
     print(f"Final altitude: {final_altitude_4:.2f} km")
@@ -80,10 +80,11 @@ if __name__ == '__main__':
     input_units = 'km'
     starting_velo = 7700
     orbital_decay_sim_time = 90
-    initial_launch_rocket_altitude = 0
+    initial_rocket_launch_altitude = 0
     initial_rocket_launch_velo = 0
     wet_mass = M_0_LV
     dry_mass = M_0_LV/MASS_RATIO_LV
     burn_time = (wet_mass - dry_mass)/M_DOT_E_LV
     rocket_launch_sim_time = 8 * burn_time
-    main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_launch_rocket_altitude, initial_rocket_launch_velo, rocket_launch_sim_time)
+    t_step = 0.1
+    main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time)
