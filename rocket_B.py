@@ -27,7 +27,8 @@ def m(t):
         return dry_mass  
     
 def grav_force(t, h):
-    return (G*M_EARTH*m(t))/(R_EARTH + h)**2
+    return (G*M_EARTH*m(t))/((R_EARTH + h)**2)
+    #return g_0*m(t)
 
 
 def a(t, h, v):
@@ -45,19 +46,19 @@ def approx(sim_time, t_step, h_0, v_0):
     t_plot[0] = 0
     h_plot[0] = h_0
     v_plot[0] = v_0
-    #has_printed = False
+    has_printed = False
     for i in range(1, len(t_plot)):
         v_plot[i] = v + t_step*a(t, h, v)
         v = v_plot[i]
         h_plot[i] = h + t_step*v
         h = h_plot[i]
-        # if h >= 400000 and has_printed == False:
-        #     print(t)
-        #     print(m(t))
-        #     print(dry_mass)
-        #     print(wet_mass-dry_mass)
-        #     print((m(t)-dry_mass/(wet_mass-dry_mass)))
-        #     has_printed = True
+        if h >= 400000 and has_printed == False:
+            print(f"to get to 400km, rocket has used {(wet_mass - m(t))/(fuel_weight)*100}% of the fuel")
+            print(f"current mass is {m(t)}")
+            print(f"dry mass is {dry_mass}")
+            print(f"wet mass is {wet_mass}")
+            print(f"fuel weight is {fuel_weight}")
+            has_printed = True
         t_plot[i] = t_plot[i-1] + t_step
         t += t_step
 
@@ -78,7 +79,7 @@ def main():
     h_0 = 0
     v_0 = 0
     time, height, velocity, max = approx(sim_time, t_step, h_0, v_0)
-    print(max)
+    #print(max)
     plot_simple(time, height)
     #plot_simple(time, velocity)
     
