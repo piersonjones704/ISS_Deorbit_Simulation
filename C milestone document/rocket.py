@@ -4,7 +4,8 @@ import numpy as np
 
 wet_mass = M_0_LV
 dry_mass = M_0_LV/MASS_RATIO_LV
-burn_time = (wet_mass - dry_mass)/M_DOT_E_LV
+fuel_weight = wet_mass - dry_mass
+burn_time = (fuel_weight)/M_DOT_E_LV
 
 def thrust(t):
     if t <= burn_time:
@@ -26,7 +27,8 @@ def m(t):
         return dry_mass  
     
 def grav_force(t, h):
-    return (G*M_EARTH*m(t))/(R_EARTH + h)**2
+    #return (G*M_EARTH*m(t))/(R_EARTH + h)**2
+
 
 def a(t, h, v):
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
@@ -43,19 +45,19 @@ def approx(sim_time, t_step, h_0, v_0):
     t_plot[0] = 0
     h_plot[0] = h_0
     v_plot[0] = v_0
-    has_printed = False
+    #has_printed = False
     for i in range(1, len(t_plot)):
         v_plot[i] = v + t_step*a(t, h, v)
         v = v_plot[i]
         h_plot[i] = h + t_step*v
         h = h_plot[i]
-        if h >= 4000000 and has_printed == False:
-            print(t)
-            print(m(t))
-            print(dry_mass)
-            print(wet_mass-dry_mass)
-            print((m(t)-dry_mass/(wet_mass-dry_mass)))
-            has_printed = True
+        # if h >= 400000 and has_printed == False:
+        #     print(t)
+        #     print(m(t))
+        #     print(dry_mass)
+        #     print(wet_mass-dry_mass)
+        #     print((m(t)-dry_mass/(wet_mass-dry_mass)))
+        #     has_printed = True
         t_plot[i] = t_plot[i-1] + t_step
         t += t_step
 
@@ -72,7 +74,7 @@ def approx(sim_time, t_step, h_0, v_0):
 def main():
     # TODO: write me
     sim_time = 8*burn_time
-    t_step = 0.1
+    t_step = 0.01
     h_0 = 0
     v_0 = 0
     time, height, velocity, max = approx(sim_time, t_step, h_0, v_0)
