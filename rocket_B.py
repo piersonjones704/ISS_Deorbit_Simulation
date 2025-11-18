@@ -28,7 +28,6 @@ def m(t):
     
 def grav_force(t, h):
     #return (G*M_EARTH*m(t))/(R_EARTH + h)**2
-    return g_0*m(t)
 
 
 def a(t, h, v):
