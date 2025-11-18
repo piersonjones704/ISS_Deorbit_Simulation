@@ -29,10 +29,30 @@ The scientific principles behind our project are:
 [Source](https://www.sciencedirect.com/science/article/abs/pii/S0094576524006143)
 
 ### Features
+This project is a numerical simulation of the deorbit of the ISS given a set of initial conditions. The simulation is divided into four distinct stage each represented by a function call:
+1. orbital_decay
+2. final_burn
+3. reentry
+4. approx
+Each stage models a different portion of the process with differing external variables and forces. The functions are called sequentially, with the final position and velocity of each being used as the initial condition of the subsequent function, excluding approx which has initial conditions provided by function parameters.
 
-Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
+program calls 4 functions, orbital_decay, final_burn, reentry, and approx (in that order), with each representing a different portion of the process with differing external variables and forces. Each portion of the simulation uses the final position and velocity of the preeceding part as initial conditions, with the exception of approx which has initial conditions determined in the function parameters, resulting in a full deorbit simulation.
+
+Each stage represents a portion of the process with differing external variables
+
+ Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
+
+
 
 ## Usage
+
+The use of the program requires the input of an initial altitude, velocity, simulation time, initial rocket altitude, initial rocket launch velocity, and rocket launch simulation time. The order of input is as follows:
+* Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
+* Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
+* Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
+* Initial rocket altitude: This is the height the rocket launch begins at (Given in kilometers)
+* Initial rocket launch velocity: The initial velocity of the rocket when it is launched (Given in meters per second)
+* Rocket launch simulation time: How long the rocket launch portion of the simulation should run (calculated based on additional factors such as wet mass, dry mass, and rocket exhaust mass flow rate)
 
 ### [Role 1] - Orbital Decay
 
@@ -41,49 +61,26 @@ The use of the program requires the input of an initial altitude, velocity, and 
 * Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
 * Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
 
-Note: The example of the orbital_decay program has an initial altitude of 400 km, velocity of 7670 m/s, and runs for 90 minutes.
+At the end of the simulation the program returns an array of position, velocity, and time, for each iteration of the simulation. The position and velocity arrays are then used for future steps of the simulation.
 
-At the end of the simulation the program returns a list of the x-positions, y-positions, x-velocities, y-velocities, and time, for each iteration of the simulation. Additionally, it creates a plot of the x and y positions of the station. 
 
 ### [Role 2] - Final Burn
 
-The program allows user to simulate the final burn of the phase of the rocket, plotting the x and y coordinates for the iss, some inputs value are recquired for the simulation to be optimal, altitude of the iss, the initial velocity of which the rocket is travling and how long the simulation will last is recquired. 
 
-altitude: this is the height of the iss, which the altitude + the radius of the earth is the initial y coordinate of the ISS
-
-velocity: this is the speed at which the iss is travelling in tangent to the earth, or in simple terms, the linear component of the orbital speed of the ISS, which is denoted as the initial speed in the x direction
-
-time: this is an indicator on how long the  simulation will last, measured in minutes.
-
-the output of the simulation will display the orbital path of the ISS on a x-y coordinate map, allowing the user to visualize the process of the final burn of the ISS.
 
 ### [Role 3] - Reentry Trajectory
 
-Upon providing the initial altitude and x- and y-velocity parameters, this program is ran by pressing the play button while in the "reentry.py" file. 
 
-For this milestone, the reentry trajectory and simulation depend entirly on the initial altitude and initial x and y velocity. Data can be input by altering the initial altitude and its units, and the initial velocity parameters in the "reentry.py" file. Ensure that after altering the parameters, the data is saved. These parameters appear as follows:
-* Initial altitude = 130 
-* Input units = 'km'
-* Initial x-velocity = 7800 m/s 
-* Initial y-velocity = 0 m/s 
-
-In regards to the output, the simulation should output time, position, and velocity as list data types. It should also plot the x- and y- position of the mass. In this section these assumptions should be made:
-- Drag is negligible.
-- The ISS and deorbit vehicle remain docked for the duration of the descent.
-- The simulation stops when the mass reaches zero altitude.
-It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
 
 ### [Role 4] - Rocket Trajectory
 
-Given standard rocket parameters, initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using explicit Euler's method. The program will output a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. The program will also return the maximum height of the rocket.
 
 ## Testing
 
-Testing our programs was an extremely involved process that required significant research to develop the domain knowledge necessary for creating effective test cases. Through this research and several calculations, we developed a series of cases that differed only by the values of a single variable to isolate its effect on the program’s output. We created successful and failing test cases to verify the program’s behavior and ensure that it handled all conditions correctly. Additionally, we focused on achieving  path coverage by designing our tests to ensure they exercised every possible execution path, allowing us to validate the logic and reliability of the code under all scenarios.
+
 
 ## Roadmap
 
-In Phase 2 we plan to combine the programs from the four individual stage of the deorbit process into one cohesive program that remains highly responsive to changes in forces, conditions, and other external variables. Additionally, we aim to refine the program and improve the clarity of the resulting plots to greatly improve readability and overall quality.
 
 ## Authors and Acknowledgment
 
