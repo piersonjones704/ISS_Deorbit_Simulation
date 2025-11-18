@@ -29,14 +29,39 @@ The scientific principles behind our project are:
 [Source](https://www.sciencedirect.com/science/article/abs/pii/S0094576524006143)
 
 ### Features
+This project is a numerical simulation of the deorbit of the ISS given a set of initial conditions. The simulation is divided into four distinct stage each represented by a function call:
+1. orbital_decay
+2. final_burn
+3. reentry
+4. approx
+Each stage models a different portion of the process with differing external variables and forces. The functions are called sequentially, with the final position and velocity of each being used as the initial condition of the subsequent function, excluding approx which has initial conditions provided by function parameters.
+
+program calls 4 functions, orbital_decay, final_burn, reentry, and approx (in that order), with each representing a different portion of the process with differing external variables and forces. Each portion of the simulation uses the final position and velocity of the preeceding part as initial conditions, with the exception of approx which has initial conditions determined in the function parameters, resulting in a full deorbit simulation.
+
+Each stage represents a portion of the process with differing external variables
+
+ Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
+
 
 
 ## Usage
 
-
+The use of the program requires the input of an initial altitude, velocity, simulation time, initial rocket altitude, initial rocket launch velocity, and rocket launch simulation time. The order of input is as follows:
+* Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
+* Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
+* Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
+* Initial rocket altitude: This is the height the rocket launch begins at (Given in kilometers)
+* Initial rocket launch velocity: The initial velocity of the rocket when it is launched (Given in meters per second)
+* Rocket launch simulation time: How long the rocket launch portion of the simulation should run (calculated based on additional factors such as wet mass, dry mass, and rocket exhaust mass flow rate)
 
 ### [Role 1] - Orbital Decay
 
+The use of the program requires the input of an initial altitude, velocity, and the length of simualtion. The order of input is as follows:
+* Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
+* Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
+* Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
+
+At the end of the simulation the program returns an array of position, velocity, and time, for each iteration of the simulation. The position and velocity arrays are then used for future steps of the simulation.
 
 
 ### [Role 2] - Final Burn
