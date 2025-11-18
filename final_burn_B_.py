@@ -12,7 +12,10 @@ def final_burn(altitude, velocity, time_minutes):
     rho = 3.8e-12
 
     # Initial conditions
+    altitude = np.array([altitude[-1,:]])
+    vel = np.array([[velocity[-1,:]]])
     pos = altitude[-1, :]
+    print("His initial" + str(pos))
     vel = velocity[-1, :]
 
     dt = 1.0
@@ -67,8 +70,7 @@ def final_burn(altitude, velocity, time_minutes):
     return positions, velocities, times, status
     
 
-# if __name__ == '__main__':
-#     final_burn(220000, 7770, 60)
-
+#if __name__ == '__main__':
+    
 
 
