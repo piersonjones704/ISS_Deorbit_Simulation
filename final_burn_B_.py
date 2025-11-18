@@ -15,7 +15,6 @@ def final_burn(altitude, velocity, time_minutes):
     altitude = np.array([altitude[-1,:]])
     vel = np.array([[velocity[-1,:]]])
     pos = altitude[-1, :]
-    print("His initial" + str(pos))
     vel = velocity[-1, :]
 
     dt = 1.0
