@@ -46,8 +46,10 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
     # Stage 4: Launch Vehicle Rocket
     print('ISS Deorbit Stage 4: Launch Vehicle Rocket')
     ts4, pos4, velo4, max = approx(rocket_launch_sim_time, t_step, initial_rocket_launch_altitude, initial_rocket_launch_velo)
-    final_altitude_4 = np.abs(np.linalg.norm(pos4[-1])) / 1000
-    final_velocity_4 = np.linalg.norm(velo4[-1])
+    # final_altitude_4 = np.abs(np.linalg.norm(pos4[-1])) / 1000
+    # final_velocity_4 = np.linalg.norm(velo4[-1])
+    final_altitude_4 = pos4[-1]/1000
+    final_velocity_4 = velo4[-1]
     print(f"Final altitude: {final_altitude_4:.2f} km")
     print(f"Final velocity: {final_velocity_4:.2f} m/s\n")
     
