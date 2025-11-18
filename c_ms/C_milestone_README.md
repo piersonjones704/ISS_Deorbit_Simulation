@@ -80,8 +80,17 @@ Given standard rocket parameters, and initial height, and an initial velocity, t
 ## Testing
 
 ### Orbital Decay testing:
+The main() function serves as a broad testing function for orbital_decay(altitude, velocity, time) by calling it with many altitude and velocity combinations. These runs provide statement and decision coverage by testing outcomes where the ISS impacts the ground and where it stays in orbit. What this testing covers is outlined below:
+- Varying altitudes (0–1000 km) and velocities (7000–9000 m/s) test boundaries between orbital stability and impact.
+- The small changes in inputs test how sensitive the simulation is to input variations. This also tests path differences.
+- Providing a high simulation duration time allows for the visualization of full-orbit behavior. This tests the simulations accuracy for large time values.
+
+In Phase 2 for this simulation component, it would be useful to test the following:
+- Invalid inputs, for example a negative altitude or a negative time.
+- A smaller, or larger time step to test the accuracy and consistency of the function.
 
 ### Final Burn testing:
+Testing this final_burn function should achieve validity in different inputs, returns properly sized coordinate lists, and produces physically consistent motion. Numerical stability should be checked with smaller timesteps and longer runs, and boundary cases (zero velocity, zero time, extreme altitude) must not produce invalid values. For coverage, statement coverage is achieved by running inputs that execute every line at least once, decision coverage by ensuring both outcomes of conditions like v == 0 are exercised, and path coverage by using varied scenarios—orbital-speed starts, rest starts, and decaying trajectories—to drive the simulation through different combinations of drag, thrust, and gravitational effects.
 
 ### Reentry testing:
 The reentry testing file checks the major components of the ISS reentry simulation, including unit conversions, how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based off the inputs. The file "test_reentry.py" is what executes the testing, printing "Test Passed" with the expected output, or "Test Failed" with the expected output and actual output. The provided tests in the file cover:
@@ -92,11 +101,12 @@ The reentry testing file checks the major components of the ISS reentry simulati
 
 To know a testing function output is correct the output line should state, "Test Passed". A "Test Failed" line suggests there is either an error in the function causing it to produce the wrong value, or the expected value is incorrect.
 
-In Phase 2 for this simulation component, it may be beneficial to update the main() function to check the simulator's "status" before plotting to prevent the output of meaningless data. Additionally, setting the status strings as constants at the top of the file could minimize accidental typos between the code and test file. Regarding the function's output, it would be useful to create  means of distinguishing between the ISS maintaining orbit and it escaping orbit, currently they are grouped as one status rather than two. The function could also be improved to simulate actual physics, with an updated Eulers method that adjusts gravity's influence based off the ISS's position/altitude.
+In Phase 2 for this simulation component, it may be beneficial to update the main() function to check the simulator's "status" before plotting to prevent the output of meaningless data. Additionally, setting the status strings as constants at the top of the file could minimize accidental typos between the code and test file. Regarding the function's output, it would be useful to create means of distinguishing between the ISS maintaining orbit and it escaping orbit, currently they are grouped as one status rather than two. The function could also be improved to simulate actual physics, with an updated Eulers method that adjusts gravity's influence based off the ISS's position/altitude.
 
 ### Rocket Trajectory testing:
-To test the simulated rocket trajectory, the initial velocity and initial height were both set to zero (the provided initial conditions). Then, the trajectory was evaluated by looking at the slope of the graph and how its magnitude and direction changed with time. If these values seemed plausible (eg: the slope stopped increasing at burn_time)
-### Previous testing overview (could be removed)
+To test the simulated rocket trajectory, the initial velocity and initial height were both set to zero (the provided initial conditions). Then, the trajectory was evaluated by looking at the slope of the graph and how its magnitude and direction changed with time. 
+
+### Testing overview
 Testing our programs was an extremely involved process that required significant research to develop the domain knowledge necessary for creating effective test cases. Through this research and several calculations, we developed a series of cases that differed only by the values of a single variable to isolate its effect on the program’s output. We created successful and failing test cases to verify the program’s behavior and ensure that it handled all conditions correctly. Additionally, we focused on achieving  path coverage by designing our tests to ensure they exercised every possible execution path, allowing us to validate the logic and reliability of the code under all scenarios.
 
 ## Roadmap
