@@ -27,7 +27,7 @@ def m(t):
         return dry_mass  
     
 def grav_force(t, h):
-    #return (G*M_EARTH*m(t))/(R_EARTH + h)**2
+    return (G*M_EARTH*m(t))/(R_EARTH + h)**2
 
 
 def a(t, h, v):
