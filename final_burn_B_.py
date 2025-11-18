@@ -70,7 +70,7 @@ def final_burn(altitude, velocity, time_minutes):
     return positions, velocities, times, status
     
 
-##if __name__ == '__main__':
+#if __name__ == '__main__':
     
 
 
