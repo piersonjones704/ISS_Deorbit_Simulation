@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from orbital_decay_B_ import orbital_decay_main
 from final_burn_B_ import final_burn
 from reentry_B_ import reentry
-from rocket_B import *
+from rocket_B import approx
 
 def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch_rocket_altitude, initial_launch_rocket_velo, rocket_launch_sim_time):
     
@@ -46,7 +46,7 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
     # Stage 4: Launch Vehicle Rocket
     print('ISS Deorbit Stage 4: Launch Vehicle Rocket')
     ts4, pos4, velo4, max = approx(rocket_launch_sim_time, t_step, initial_rocket_launch_altitude, initial_rocket_launch_velo)
-    final_altitude_4 = (np.linalg.norm(pos4[-1]) - R_EARTH) / 1000
+    final_altitude_4 = np.abs(np.linalg.norm(pos4[-1])) / 1000
     final_velocity_4 = np.linalg.norm(velo4[-1])
     print(f"Final altitude: {final_altitude_4:.2f} km")
     print(f"Final velocity: {final_velocity_4:.2f} m/s\n")
@@ -55,7 +55,7 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
     x_positions = np.concatenate([pos1[:, 0], pos2[:, 0], pos3[:, 0]])
     y_positions = np.concatenate([pos1[:, 1], pos2[:, 1], pos3[:, 1]])
     # plot_position_earth(x_positions, y_positions)
-    # plot_simple(ts4, pos4)
+    plot_simple(ts4, pos4)
 
     """Plots Earth circumference and x-, y-position"""
     th = np.linspace(0, 2*np.pi,100)
@@ -68,11 +68,10 @@ def main(starting_altitude, input_units, starting_velo, sim_time, initial_launch
     plt.axis('equal')
     plt.show()
 
-
-    # # Status of ISS
-    # final_ISS_status = status3
-    # print(final_ISS_status)
-    # return final_ISS_status
+    # Status of ISS
+    final_ISS_status = status3
+    print(final_ISS_status)
+    return final_ISS_status
 
 if __name__ == '__main__':
     reentry_tstep = None
