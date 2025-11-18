@@ -69,6 +69,7 @@ def approx(sim_time, t_step, h_0, v_0):
             h_plot = h_plot[:i-1]
             v_plot = v_plot[:i-1]
             break
+    print(h_plot[-1])
     return t_plot, h_plot, v_plot, max(h_plot)
     
 
