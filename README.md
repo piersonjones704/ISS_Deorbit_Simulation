@@ -29,20 +29,19 @@ The scientific principles behind our project are:
 [Source](https://www.sciencedirect.com/science/article/abs/pii/S0094576524006143)
 
 ### Features
-This project is a numerical simulation of the deorbit of the ISS given a set of initial conditions. The simulation is divided into four distinct stage each represented by a function call:
+This project is a numerical simulation of the deorbit of the ISS given a set of initial conditions. The simulation is divided into four distinct stages each represented by a function call:
 1. orbital_decay
 2. final_burn
 3. reentry
 4. approx
+
 Each stage models a different portion of the process with differing external variables and forces. The functions are called sequentially, with the final position and velocity of each being used as the initial condition of the subsequent function, excluding approx which has initial conditions provided by function parameters.
 
-program calls 4 functions, orbital_decay, final_burn, reentry, and approx (in that order), with each representing a different portion of the process with differing external variables and forces. Each portion of the simulation uses the final position and velocity of the preeceding part as initial conditions, with the exception of approx which has initial conditions determined in the function parameters, resulting in a full deorbit simulation.
+The program calls 4 functions, orbital_decay, final_burn, reentry, and approx (in that order), with each representing a different portion of the process with differing external variables and forces. Each portion of the simulation uses the final position and velocity of the preeceding part as initial conditions, with the exception of approx which has initial conditions determined in the function parameters, resulting in a full deorbit simulation.
 
-Each stage represents a portion of the process with differing external variables
+Each stage represents a portion of the process with differing external variables.
 
  Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
-
-
 
 ## Usage
 
@@ -56,13 +55,12 @@ The use of the program requires the input of an initial altitude, velocity, simu
 
 ### [Role 1] - Orbital Decay
 
-The use of the program requires the input of an initial altitude, velocity, and the length of simualtion. The order of input is as follows:
+The use of the program requires the input of an initial altitude, velocity, and the length of simulation. The order of input is as follows:
 * Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
 * Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
 * Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
 
 At the end of the simulation the program returns an array of position, velocity, and time, for each iteration of the simulation. The position and velocity arrays are then used for future steps of the simulation.
-
 
 ### [Role 2] - Final Burn
 
@@ -70,8 +68,19 @@ At the end of the simulation the program returns an array of position, velocity,
 
 ### [Role 3] - Reentry Trajectory
 
+Upon providing the necessary parameters for the orbital_decay function, this program is ran by pressing the play button while in the "full_simulation_file.py" file. 
 
+Upon running the simulation, this stage of the simulation takes the final position - x and y position components - and final velocity - x and y velocity components -  of the ISS provided by the previous simulation stage as its parameters. Additionally, the "tstep" and "max_steps" parameters are set as desired. Specifically, a smaller "tstep" value is optimal as it creates more points on the graph for a smoother line plot, this provides a more accurate visualization of the model. A larger "max_steps" value is ideal as it ensures the simulation has enough time to run to allow the ISS to make impact with the ground if valid parameters are set for that scenario. 
 
+Data can be input by altering the initial altitude and its units, and the initial velocity parameters in the "full_simulation_file.py" file. These parameters are utilized in the "orbital_decay" function to start the whole simulation. Ensure that after altering the parameters, the data is saved. For this function, like mentioned, "tstep" and "max_steps" are the only unique parameters. These appear as follows:
+* tstep = 0.1
+* max_steps = 100000
+
+In regards to the output, this specific component of the entire simulation should output time, position, and velocity as NumPy array types. For the position and velocity, the x and y components are seperated into their own columns within the NumPy arrays. It will then display the final altitude and final velocity of the reentry portion of the simulation in the terminal with their respective units. In this section these assumptions should be made:
+- The ISS and deorbit vehicle remain docked for the duration of the descent.
+- The simulation stops either when the mass reaches zero altitude or when the amount of steps provided "max_steps" runs out.
+It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
+ 
 ### [Role 4] - Rocket Trajectory
 
 
