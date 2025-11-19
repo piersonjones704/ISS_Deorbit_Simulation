@@ -64,7 +64,13 @@ At the end of the simulation the program returns an array of position, velocity,
 
 ### [Role 2] - Final Burn
 
+The final burn function is corresponded to the second phase of the whole function. the final burn function takes three parameters:
 
+* final position of the rocket (x and y coordinate) from stage 1 as the initial position of stage 2
+* final velocity (x and y components) from stage 1 as the initial velocity of stage 2
+* tstep, which is repsonsible for controlling how long the simulation is going to run.
+
+the final burn function then returns the final position and velocity of the rocket at the end of the tstep and plot the positions on the graph.
 
 ### [Role 3] - Reentry Trajectory
 
