@@ -68,27 +68,43 @@ At the end of the simulation the program returns an array of position, velocity,
 
 ### [Role 3] - Reentry Trajectory
 
-Upon providing the necessary parameters for the orbital_decay function, this program is ran by pressing the play button while in the "full_simulation_file.py" file. 
+Upon providing the necessary parameters for the orbital_decay function, this program is run by pressing the play button while in the "full_simulation_file.py" file. 
 
-Upon running the simulation, this stage of the simulation takes the final position - x and y position components - and final velocity - x and y velocity components -  of the ISS provided by the previous simulation stage as its parameters. Additionally, the "tstep" and "max_steps" parameters are set as desired. Specifically, a smaller "tstep" value is optimal as it creates more points on the graph for a smoother line plot, this provides a more accurate visualization of the model. A larger "max_steps" value is ideal as it ensures the simulation has enough time to run to allow the ISS to make impact with the ground if valid parameters are set for that scenario. 
+Upon running the simulation, this stage of the simulation takes the final position - x and y position components - and final velocity - x and y velocity components -  of the ISS provided by the previous simulation stage as its parameters. Additionally, the "tstep" and "max_steps" parameters are set as desired. Specifically, a smaller "tstep" value is optimal as it creates more points on the graph for a smoother line plot, which provides a more accurate visualization of the model. A larger "max_steps" value is ideal as it ensures the simulation has enough time to run to allow the ISS to make impact with the ground if valid parameters are set for that scenario. 
 
-Data can be input by altering the initial altitude and its units, and the initial velocity parameters in the "full_simulation_file.py" file. These parameters are utilized in the "orbital_decay" function to start the whole simulation. Ensure that after altering the parameters, the data is saved. For this function, like mentioned, "tstep" and "max_steps" are the only unique parameters. These appear as follows:
+Data can be input by altering the initial altitude and its units, and the initial velocity parameters in the "full_simulation_file.py" file. These parameters are utilized in the "orbital_decay" function to start the whole simulation. Ensure that after altering the parameters, the data is saved. For this function, as mentioned, "tstep" and "max_steps" are the only unique parameters. These appear as follows:
 * tstep = 0.1
 * max_steps = 100000
 
-In regards to the output, this specific component of the entire simulation should output time, position, and velocity as NumPy array types. For the position and velocity, the x and y components are seperated into their own columns within the NumPy arrays. It will then display the final altitude and final velocity of the reentry portion of the simulation in the terminal with their respective units. In this section these assumptions should be made:
+In regards to the output, this specific component of the entire simulation should output time, position, and velocity as NumPy array types. For the position and velocity, the x and y components are separated into their own columns within the NumPy arrays. It will then display the final altitude and final velocity of the reentry portion of the simulation in the terminal with their respective units. In this section, these assumptions should be made:
 - The ISS and deorbit vehicle remain docked for the duration of the descent.
-- The simulation stops either when the mass reaches zero altitude or when the amount of steps provided "max_steps" runs out.
-It will be apparent that the program ran succesfully if it outputs eveything previously outlined.
+- The simulation stops either when the mass reaches zero altitude or when the amount of steps provided by "max_steps" runs out.
+It will be apparent that the program ran successfully if it outputs everything previously outlined.
  
 ### [Role 4] - Rocket Trajectory
 
 
+
 ## Testing
 
+### Orbital Decay, Final Burn, and Reentry Testing
+The full testing file checks each components of the ISS simulation, including unit conversions, how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. 
+
+The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based on the inputs. These strings are integrated throughout the individual functions for every stage, except for "Rocket Trajectory." This is because orbital decay, final burn, and reentry are the stages of the ISS's deorbit, while the rocket's launch trajectory is a separate stage from the ISS's position and velocity during its deorbit - "Rocket Trajectory" will get its own testing overview. These strings are validated by determining whether the altitude ever reaches zero during the function to output a "hit ground" status or a "orbiting or escaped orbit" status if it did not make impact. The file "test_full_simulation.py" executes the testing, printing "Test Passed" with the expected output or "Test Failed" with the expected output and the actual output. The provided tests in the file cover:
+- ISS orbit and impact behavior: verifies using an expected outcome for different initial altitudes, velocities, and directions.
+- Unit conversions: kilometers, meters, centimeters, feet, miles, and invalid unit inputs
+- Input validation: ensures negative or zero "tstep" and "max_steps" values produce the correct error messages
+- Edge cases: tests were included for an initial altitude of zero, very large time steps - "tstep" - and small and zero "max_steps" values.
+
+To know that a testing function output is correct, the output line should state, "Test Passed". A "Test Failed" line suggests there is either an error in the function, causing it to produce the wrong value, or the expected value is incorrect.
+
+In Phase 3 for this simulation component, it would be useful to create means of distinguishing between the ISS maintaining orbit and it escaping orbit; currently, they are grouped as one status rather than two. 
+
+### Rocket Trajectory Testing
 
 
 ## Roadmap
+
 
 
 ## Authors and Acknowledgment
