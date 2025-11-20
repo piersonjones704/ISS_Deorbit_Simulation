@@ -25,20 +25,20 @@ def do_test(starting_altitude, input_units, starting_velo, orbital_decay_sim_tim
 if __name__ == '__main__':
     # Test cases:
     do_test(275, 'km', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')
-    # When initial x velocity is below the steady orbit 7800 m/s velocity with the steady orbit altitude
+    # When initial x velocity is below the impact velocity (7700 m/s) with the impact altitude value
     do_test(275, 'km', 7000, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')
-    # When initial x velocity is above the steady orbit 7800 m/s velocity with the steady orbit altitude
+    # When initial x velocity is above the impact velocity (7700 m/s) with the impact altitude value
     do_test(275, 'km', 8200, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'orbiting or escaped orbit')
-    # # When initial altitude is below the standard 130 km that enables a steady orbit with the steady orbit x velocity
+    # When initial altitude is below the standard 275 km that causes impact with the impact x velocity
     do_test(230, 'km', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')
     # do_test(100, 'km', 7800, 0, 0.1, 'hit ground')
-    # # When initial altitude is above the standard 130 km that enables a steady orbit with the steady orbit x velocity
+    # When initial altitude is above the standard 275 km that causes impact with the impact x velocity
     do_test(300, 'km', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')
     # do_test(150, 'km', 7800, 0, 0.1, 'hit ground')
-    # # When initial altitude and initial x velocity are both above their steady orbit values
+    # When initial altitude and initial x velocity are both above their initial impact values
     do_test(300, 'km', 8200, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'orbiting or escaped orbit')    
     # do_test(150, 'km', 8000, 0, 0.1, 'orbiting or escaped orbit')
-    # # When initial altitude and initial x velocity are both below their steady orbit values
+    # When initial altitude and initial x velocity are both below their initial impact values
     do_test(230, 'km', 7500, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')    
     # do_test(100, 'km', 7500, 0, 0.1, 'hit ground')
     
@@ -54,16 +54,16 @@ if __name__ == '__main__':
     # # When initial altitude and initial x velocity are both below their steady orbit values and with a large initial y velocity towards Earth
     # do_test(110, 'km', 7200, -150, 0.1, 'hit ground')
 
-    # # When initial altitude units are changed to centimeters with initial altitude and initial x and y velocity both at their steady orbit values
+    # # When initial altitude units are changed to centimeters with initial altitude and initial x and y velocity both at their initial impact values
     do_test(27500000, 'cm', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')    
     # do_test(13000000, 'cm', 7800, 0, 0.1, 'hit ground')
-    # # When initial altitude units are changed to meters with initial altitude and initial x and y velocity both at their steady orbit values
+    # # When initial altitude units are changed to meters with initial altitude and initial x and y velocity both at their initial impact values
     do_test(275000, 'm', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')    
     # do_test(130000, 'm', 7800, 0, 0.1, 'hit ground')
-    # # When initial altitude units are changed to feet with initial altitude and initial x and y velocity both at their steady orbit values
+    # # When initial altitude units are changed to feet with initial altitude and initial x and y velocity both at their initial impact values
     do_test(902231, 'ft', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')    
     # do_test(426509, 'ft', 7800, 0, 0.1, 'hit ground')
-    # # When initial altitude units are changed to miles with initial altitude and initial x and y velocity both at their steady orbit values
+    # # When initial altitude units are changed to miles with initial altitude and initial x and y velocity both at their initial impact values
     do_test(170.8770834576, 'miles', 7700, 90, 0, 0, 8 * burn_time, 0.1, 100000, 'hit ground')    
     # do_test(80.7783, 'miles', 7800, 0, 0.1, 'hit ground')
     # # When initial alitude is 0 (immediate impact)
