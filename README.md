@@ -111,7 +111,13 @@ In Phase 3 for this simulation component, it would be useful to create means of 
 
 ## Roadmap
 
+Our roadmap through this project can be split into three phases so far: background research, individual stages coding and final integration. 
 
+During the background research stage, our background research focus on the foundation of domain knowledge for an ISS deorbit milestone by explaining what the ISS is, why and how it will be decommissioned, the key safety and physical considerations involved, and the scientific principles—laws, forces, trajectories, and numerical methods—needed for each role to model the deorbit process accurately. 
+
+Through this background research, we then divided each section to a designated member to write code for each individual stage of the iss deorbit simulation, which includes orbital decay, final burn, reentry trajectory and the rocket trajectory stages. we then coded each simulation using the parameters given and imported matplotlib to plot our individual simulation. 
+
+After completing our assigned task for simulation, we then approached the final integration of individual simulation in a full simulation file. Similar to the chronological order describe in the previous paragraph, the ISS first experience orbital decay with given initial prarmeters, then the final position and velocity output from orbital decay will then be the initial position and velocity input for the next stage - final burn, and so on. the final stage - rocket trajectory will then return a final position and velocity of the rocket, completing the simulation. 
 
 ## Authors and Acknowledgment
 
