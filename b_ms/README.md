@@ -122,3 +122,6 @@ After completing our assigned task for simulation, we then approached the final 
 ## Authors and Acknowledgment
 
 Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
+
+## AI statement
+No AI was used in the development of the code or the writing in the md file. 
