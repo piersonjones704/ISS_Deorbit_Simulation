@@ -8,8 +8,17 @@ from reentry_B_ import reentry
 from rocket_B import approx
 
 def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps,  testing=False):
-    
+    '''
+    The main function simulate the four stages of the tractory of the ISS sation.
+    The main functions take initial input such as starting altitude, starting velocity, simulation time of both the iss station and the rocket.
+    The main funciton will then output the final velocity and final velocity of the vehicle. 
+    '''
     # Stage 1: Orbital Decay
+    '''
+    stage 1, this is the simulation of orbital decay.
+    the function takes in starting altitude, input units of measurement, starting velocity and simulation time for this phrase.
+    the function will then plot the tracjectory of the station and return the final position and final velocity of the station.
+    '''
     if not testing:
         print('ISS Deorbit Stage 1: Orbital Decay')
     pos1, velo1, ts1, status1 = orbital_decay_main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time)
@@ -24,6 +33,11 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
         print(f"Final velocity: {final_velocity_1:.2f} m/s\n")
     
     # Stage 2: Final Burn
+    '''
+    stage 2, this is the simulation of final burn.
+    the function takes in starting altitude, starting velocity for this phrase, which these input values are extracted from the output of the previous function, and the chosen simulation time.
+    the function will then plot the tracjectory of the station and return the final position and final velocity of the station.
+    '''
     if not testing:
         print('ISS Deorbit Stage 2: Final Burn')
     pos2, velo2, ts2, status2 = final_burn(pos1, velo1, 60)
@@ -36,6 +50,11 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
         print(f"Final velocity: {final_velocity_2:.2f} m/s\n")
 
     # Stage 3: Re-entry
+    '''
+    stage 3, this is the simulation of re-entry.
+    the function takes in starting altitude, starting velocity and simulation time for this phrase, which these input values are extracted from the output of the previous function, time increments and total simulation time.
+    the function will then plot the tracjectory of the station and return the final position and final velocity of the station.
+    '''
     if not testing:
         print('ISS Deorbit Stage 3: Reentry')
     pos3, velo3, ts3, status3 = reentry(pos2, velo2, tstep, reentry_max_steps)
@@ -50,6 +69,11 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
         print(f"Final velocity: {final_velocity_3:.2f} m/s\n")
 
     # Stage 4: Launch Vehicle Rocket
+    '''
+    stage 4, this is the simulation of launch vehicle rocket.
+    the function takes in starting altitude, starting velocity, simulation time for this phrase, and time increments. this function takes its own measurements as it is independent to the tracjectory of the ISS station. 
+    the function will then return the final position and final velocity of the rocket. 
+    '''
     if not testing:
         print('ISS Deorbit Stage 4: Launch Vehicle Rocket')
     ts4, pos4, velo4, max = approx(rocket_launch_sim_time, tstep, initial_rocket_launch_altitude, initial_rocket_launch_velo)
