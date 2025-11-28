@@ -60,11 +60,11 @@ def orbital_decay(y0, starting_velo, sim_time):
         altitudec = r-R_EARTH
         vmag = math.sqrt(vx**2+vy**2)
         rho = RHO_0*np.exp(-(altitudec/7500))
-        Fd = .5*rho*(vmag**2)*(C_D_ISS*AREA_ISS+C_D_TRUSS*AREA_TRUSS)
+        Fd = .5*rho*(vmag**2)*(C_D_ISS*AREA_ISS)
         if vmag <= 0:
             Fd = 0
-        ax = (Fg/r) * x - (Fd/(vmag*(M_ISS+M_TRUSS+M_DV))) * vx
-        ay = (Fg/r) * y - (Fd/(vmag*(M_ISS+M_TRUSS+M_DV))) * vy
+        ax = (Fg/r) * x - (Fd/(vmag*(M_ISS+M_DV))) * vx
+        ay = (Fg/r) * y - (Fd/(vmag*(M_ISS+M_DV))) * vy
 
         vy += ay * dt
         vx += ax *dt
