@@ -63,8 +63,8 @@ def orbital_decay(y0, starting_velo, sim_time):
         Fd = .5*rho*(vmag**2)*(C_D_ISS*AREA_ISS)
         if vmag <= 0:
             Fd = 0
-        ax = (Fg/r) * x - (Fd/(vmag*(M_ISS+M_DV))) * vx
-        ay = (Fg/r) * y - (Fd/(vmag*(M_ISS+M_DV))) * vy
+        ax = (Fg/r) * x - (Fd/(vmag*(M_ISS))) * vx
+        ay = (Fg/r) * y - (Fd/(vmag*(M_ISS))) * vy
 
         vy += ay * dt
         vx += ax *dt
