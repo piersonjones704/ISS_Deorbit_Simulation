@@ -13,6 +13,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     pos[0] = [0,altitude+R_EARTH]
     vel[0] = [velocity,0]
 
-    current_time = 0
-    while current_time < orbital_decay_time:
-        pos[current_time], vel[current_time] = Runge_Kutta(orbital_decay_accel,pos,vel,timestep)
+    ct = 0
+    for ct in range(len(od_time)):
+        posnext, velnext = Runge_Kutta(orbital_decay_accel,pos[ct],vel[ct],timestep)
+        pos[ct+1] = posnext
+        vel[ct+1] = velnext
