@@ -3,9 +3,6 @@ import math
 from c_ms.constants import *
 
 def Runge_Kutta(accel,pos,vel,ts):
-    pos = pos[-1]
-    vel = vel[-1]
-
     k1 = accel(pos,vel)
     l1 = vel
 
@@ -18,7 +15,7 @@ def Runge_Kutta(accel,pos,vel,ts):
     k4 = accel(pos + ts*l3, vel + ts*k3)
     l4 = vel + ts*k3
 
-    veln = vel + (ts/6)(k1 + 2*k2 + 2*k3 + k4)
-    posn = pos + (ts/6)(l1 + 2*l2 + 2*l3 + l4)
+    veln = vel + (ts/6)*(k1 + 2*k2 + 2*k3 + k4)
+    posn = pos + (ts/6)*(l1 + 2*l2 + 2*l3 + l4)
 
-    return veln, posn
+    return posn, veln
