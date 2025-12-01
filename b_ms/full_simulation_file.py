@@ -86,9 +86,6 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
         print(f"Final velocity: {final_velocity_4:.2f} m/s\n")
     
     # Plotting
-    x_positions = np.concatenate([pos1[:, 0], pos2[:, 0], pos3[:, 0]])
-    y_positions = np.concatenate([pos1[:, 1], pos2[:, 1], pos3[:, 1]])
-    # plot_position_earth(x_positions, y_positions)
     if not testing:    
         plot_simple(ts4, pos4)
 
