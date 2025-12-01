@@ -20,7 +20,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
         pos[ct1+1] = posnext
         vel[ct1+1] = velnext
     ct2 = 0
-    for ct2 in range(len(fb_time))
+    for ct2 in range(len(fb_time)):
         posnext, velnext = Runge_Kutta(final_burn_accel,pos[ct2],vel[ct2],timestep)
         pos[ct2+1] = posnext
         vel[ct2+1] = velnext
