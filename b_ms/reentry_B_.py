@@ -3,44 +3,9 @@ from constants import *
 from plot import plot_position_earth
 import numpy as np
  
-# Convert all input units for the initial altitude into meters.
-# def unit_converter_initialaltitude(initial_x_position, input_x_unit, initial_y_position, input_y_unit):
-#     x0, y0 = initial_altitude_conversion_process(initial_x_position, input_x_unit, initial_y_position, input_y_unit)
-#     if y0 == None or x0 == None:
-#         status = 'unit converter error'
-#         return status, x0, y0
-#     else:
-#         status = 'unit conversion complete'
-#         return status, x0, y0 
-
-# def initial_altitude_conversion_process(initial_x_position, input_x_unit, initial_y_position, input_y_unit):
-#     x = initial_x_position
-#     if input_x_unit == 'km':
-#         x = x * 10**3
-#     elif input_x_unit == 'm':
-#         x = x
-#     elif input_x_unit == 'miles':
-#         x = x * 1609.344
-#     elif input_x_unit == 'ft':
-#         x = x * 0.3048
-#     elif input_x_unit == 'cm':
-#         x = x * 10**(-2)
-#     y = initial_y_position
-#     if input_y_unit == 'km':
-#         y = y * 10**3
-#     elif input_y_unit == 'm':
-#         y = y
-#     elif input_y_unit == 'miles':
-#         y = y * 1609.344
-#     elif input_y_unit == 'ft':
-#         y = y * 0.3048
-#     elif input_y_unit == 'cm':
-#         y = y * 10**(-2)
-#     else:
-#         return None, None
-#     return x, y
-
 def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
+    '''Uses parameters outlined in the reentry function that calls this function to calculate the reentry position that will occur throughout the simulation run time
+        and returns the array of velocity, position, and time, for the simulation and whether or not the station hit the ground or remained in orbit, given the initial parameters''' 
     if tstep <= 0 and max_steps < 0: 
         status = 'invalid tstep and max_steps values'
         return None, None, None, status
@@ -110,6 +75,8 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
 
 # call euler simulation function with initial y, end time, and time step
 def reentry(pos2, velo2, tstep = 0.1, max_steps = 100000):
+    '''Takes final altitude, final velocity from orbital decay function, time intervals, and a max simulation duration, and calls the second_order_ex function to calculate the reentry position that will occur throughout the simulation run time
+        returns the array of velocity, position, and time, for the simulation and whether or not the station hit the ground or remained in orbit, given the initial parameters'''
     # Parameters
     initial_x_position = pos2[-1, 0] 
     # input_x_unit = 'm'
