@@ -82,9 +82,7 @@ def main():
     time, height, velocity, max = rocket(sim_time, t_step, h_0, v_0)
     #print(max)
     plot_simple(time, height)
-    #plot_simple(time, velocity)
-    
-    
+    #plot_simple(time, velocity)    
 
 if __name__ == '__main__':
     main()
