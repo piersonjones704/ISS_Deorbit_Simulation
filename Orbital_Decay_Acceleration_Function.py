@@ -23,5 +23,3 @@ def orbital_decay_accel(pos,vel):
     ay = (Fg/r) * y - (Fd/(vmag*(M_ISS+M_DV))) * vy
     return np.array([ax,ay])
 
-def final_burn_accel(pos, vel):
-      pass
