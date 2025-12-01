@@ -4,8 +4,7 @@ from plot import plot_position_earth
 import numpy as np
  
 def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
-    '''Uses parameters outlined in the reentry function that calls this function to calculate the reentry position that will occur throughout the simulation run time
-        and returns the array of velocity, position, and time, for the simulation and whether or not the station hit the ground or remained in orbit, given the initial parameters''' 
+    '''Uses parameters outlined in the reentry function to calculate the reentry position that will occur throughout the simulation run time, returns an array of velocity, position, and time, for the simulation and its status''' 
     if tstep <= 0 and max_steps < 0: 
         status = 'invalid tstep and max_steps values'
         return None, None, None, status
