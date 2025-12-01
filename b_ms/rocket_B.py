@@ -8,18 +8,22 @@ fuel_weight = wet_mass - dry_mass
 burn_time = (fuel_weight)/M_DOT_E_LV
 
 def thrust(t):
+    '''calculates thrust as a function of time after t = 0'''
     if t <= burn_time:
         return M_DOT_E_LV*I_SP_LV*g_0
     else:
         return 0
     
 def air_density(h):
+    '''calculates air density as a function of height'''
     return RHO_0*math.exp(-h/H_0)
 
 def drag_force(v, h):
+    '''calculates drag force as a function of velocity and height (for air density calcs)'''
     return 1/2*air_density(h)*v*abs(v)*C_D_LV*AREA_LV
 
 def m(t):
+    '''calculates mass as a function of time based on mass flow rate'''
     mass = M_0_LV - M_DOT_E_LV*t
     if mass > dry_mass:
         return mass
@@ -27,14 +31,17 @@ def m(t):
         return dry_mass  
     
 def grav_force(t, h):
+    '''calculates gravitational force as a function of time (used to find mass) and height'''
     return (G*M_EARTH*m(t))/((R_EARTH + h)**2)
     #return g_0*m(t)
 
 
 def a(t, h, v):
+    '''calculates acceleration based on the sum of forces'''
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
 
 def rocket(sim_time, t_step, h_0, v_0):
+    '''performs an explicit second degree euler simulation using the acceleration function, initial velocity, and initial height'''
     t = 0.0
     h = h_0
     v = v_0
@@ -82,9 +89,7 @@ def main():
     time, height, velocity, max = rocket(sim_time, t_step, h_0, v_0)
     #print(max)
     plot_simple(time, height)
-    #plot_simple(time, velocity)
-    
-    
+    #plot_simple(time, velocity)    
 
 if __name__ == '__main__':
     main()

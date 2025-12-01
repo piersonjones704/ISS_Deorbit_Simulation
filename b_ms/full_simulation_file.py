@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from orbital_decay_B_ import orbital_decay_main
 from final_burn_B_ import final_burn
 from reentry_B_ import reentry
-from rocket_B import approx
+from rocket_B import rocket
 
 def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps,  testing=False):
     '''
@@ -76,7 +76,7 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
     '''
     if not testing:
         print('ISS Deorbit Stage 4: Launch Vehicle Rocket')
-    ts4, pos4, velo4, max = approx(rocket_launch_sim_time, tstep, initial_rocket_launch_altitude, initial_rocket_launch_velo)
+    ts4, pos4, velo4, max = rocket(rocket_launch_sim_time, tstep, initial_rocket_launch_altitude, initial_rocket_launch_velo)
     # final_altitude_4 = np.abs(np.linalg.norm(pos4[-1])) / 1000
     # final_velocity_4 = np.linalg.norm(velo4[-1])
     final_altitude_4 = pos4[-1]/1000
@@ -86,9 +86,6 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
         print(f"Final velocity: {final_velocity_4:.2f} m/s\n")
     
     # Plotting
-    x_positions = np.concatenate([pos1[:, 0], pos2[:, 0], pos3[:, 0]])
-    y_positions = np.concatenate([pos1[:, 1], pos2[:, 1], pos3[:, 1]])
-    # plot_position_earth(x_positions, y_positions)
     if not testing:    
         plot_simple(ts4, pos4)
 
