@@ -6,7 +6,8 @@ from plot import plot_position_earth
 # Convert all input units for the initial altitude into meters.
 
 def unit_converter_initialaltitude(starting_altitude, input_units):
-    '''Alerts user if the unit conversion process has succeeded or failed'''
+    '''Takes initial parameters, starting altitude and input units of starting altitude, and runs the orbital decay function
+        If orbital decay returns value asserts that unit conversion was successful'''
     y0 = initial_altitude_conversion_process(starting_altitude, input_units)
     if y0 == None:
         status = 'unit converter error'
@@ -16,7 +17,7 @@ def unit_converter_initialaltitude(starting_altitude, input_units):
         return status, y0 
 
 def initial_altitude_conversion_process(starting_altitude, input_units):
-    '''Converts the units of the initial altitude from whatever is given into units that are easy to calculate with'''
+    '''Converts the input units of the initial altitude from given units into meters'''
     y = starting_altitude
     if input_units == 'km':
         y = y * 10**3
@@ -33,9 +34,9 @@ def initial_altitude_conversion_process(starting_altitude, input_units):
     return y
 
 def orbital_decay(y0, starting_velo, sim_time):
-    '''Takes initial altitude, starting velocity, and length of simualtion, and calcualtes the orbital decay that will occur throughout the simulation run time
-        returns the array of velocity, position, and time, for the simulation and whether or not the station hit the ground or remained in orbit, given the initial parameters'''
-    # altitudem = starting_altitude * 1000
+    '''Calculates the orbital decay of the ISS that will occur in the given simulation time given initial parameters (Including length of simulation)
+       Takes initial altitude, starting velocity, and length of simualtion
+       Returns the array of velocity, position, and time, with entries at given timesteps for the simulation and the status of the station (whether or not the station hit the ground or remained in orbit, given the initial parameters)'''
     altitudem = y0
     vx = starting_velo
     vy = 0
@@ -91,6 +92,8 @@ def orbital_decay(y0, starting_velo, sim_time):
 
 def orbital_decay_main(starting_altitude, input_units, starting_velo, sim_time):
     '''Connects all portions of the orbital decay process: unit conversion, unit conversion confirmation, and the orbital decay simulation
+    Takes orbital decay initial parameters, initial altitude, altitude input units, initial velocity, and length of simulation
+    Converts units, confirms unit conversion function worked properly, then runs orbital decay simulation.
     Returns arrays for position, velocity, and time, and returns the status of the staion (If it hit the ground or remained in orbit)'''
     # Unit conversion function:
     status, y0 = unit_converter_initialaltitude(starting_altitude, input_units)
