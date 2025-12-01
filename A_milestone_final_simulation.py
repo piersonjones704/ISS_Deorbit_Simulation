@@ -1,8 +1,8 @@
 import math
 import numpy as np
-from b_ms.constants import *
+from constants import *
 from Runge_Kutta_Integration_Interface import *
-from Acceleration_Funcs_for_Runge_Kutta_Method import *
+from Orbital_Decay_Acceleration_Function import *
 
 def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn_time):
     od_time = np.arange(0,orbital_decay_time,timestep)
