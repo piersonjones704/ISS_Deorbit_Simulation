@@ -89,7 +89,7 @@ It will be apparent that the program ran successfully if it outputs everything p
  
 ### [Role 4] - Rocket Trajectory
 
-
+This program generates a simulated 1D (height vs time) rocket trajectory using explicit Euler approximation, taking into account the various forces acting on the rocket in the vertical direction. This approximation takes the inputs  of: intial height, initial vertical velocity, initial mass (wet mass), dry mass, mass ratio, mass flow rate, simulation time, and time step. The approximation outputs the graph of rocket height vs time, as well as the amount of fuel needed to get to 400km altitude.
 
 ## Testing
 
@@ -108,6 +108,7 @@ In Phase 3 for this simulation component, it would be useful to create means of 
 
 ### Rocket Trajectory Testing
 
+To test the rocket trajectory, the slope of the graph was evaluated and compared to the burn time. For example, at the end of the burn time, the slope of the graph should stop increasing and start decreasing, demonstrating a change in direction of net force from up to down due to loss of thrust. In addition, with an initial height and velocity of zero, the inital height of the rocket as represented on the graph should be zero, and the line tangent to the graph at t = 0 should be horizontal. 
 
 ## Roadmap
 
