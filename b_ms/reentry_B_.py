@@ -24,7 +24,7 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
     y = y0 
     vx = vx0
     vy = vy0
-    total_mass = M_ISS + M_TRUSS + M_DV
+    total_mass = M_ISS + M_DV
     # Set time, x, y, vx, amd vy list
     t_list = [t] 
     x_list = [x]
@@ -46,7 +46,7 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
         altitude = r - R_EARTH
         vmag = math.sqrt(vx**2+vy**2)
         rho = RHO_LEO*np.exp(-(altitude/7500))
-        Fd = .5*rho*(vmag**2)*(C_D_ISS*AREA_ISS+C_D_TRUSS*AREA_TRUSS)
+        Fd = .5*rho*(vmag**2)*(C_D_ISS*AREA_ISS)
         # End the function when the mass hits the ground
         if altitude <= 0:
             status = 'hit ground'
