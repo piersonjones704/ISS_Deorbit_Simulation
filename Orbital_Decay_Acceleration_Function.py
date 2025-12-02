@@ -1,5 +1,5 @@
 import numpy as np
-from c_ms.constants import *
+from constants import *
 import math
 
 
@@ -22,3 +22,4 @@ def orbital_decay_accel(pos,vel):
     ax = (Fg/r) * x - (Fd/(vmag*(M_ISS+M_DV))) * vx
     ay = (Fg/r) * y - (Fd/(vmag*(M_ISS+M_DV))) * vy
     return np.array([ax,ay])
+

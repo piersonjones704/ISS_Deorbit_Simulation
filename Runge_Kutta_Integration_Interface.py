@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from c_ms.constants import *
+from constants import *
 
 def Runge_Kutta(accel,pos,vel,ts):
     k1 = accel(pos,vel)
