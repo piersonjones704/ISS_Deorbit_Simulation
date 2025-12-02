@@ -57,6 +57,12 @@ The use of the program requires the input of an initial altitude, velocity, simu
 
 ### [Role 2] - Final Burn
 
+Similar to the previous milestone, the final burn function is corresponded to the second phase of the whole function. the final burn function takes three parameters:
+
+* final position of the rocket (x and y coordinate) from stage 1 as the initial position of stage 2
+* final velocity (x and y components) from stage 1 as the initial velocity of stage 2
+* tstep, which is repsonsible for controlling how long the simulation is going to run.
+
 ### [Role 3] - Reentry Trajectory
 
 ### [Role 4] - Rocket Trajectory
