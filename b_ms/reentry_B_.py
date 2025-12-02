@@ -78,24 +78,17 @@ def reentry(pos2, velo2, tstep = 0.1, max_steps = 100000):
         returns the array of velocity, position, and time, for the simulation and whether or not the station hit the ground or remained in orbit, given the initial parameters'''
     # Parameters
     initial_x_position = pos2[-1, 0] 
-    # input_x_unit = 'm'
     initial_y_position = pos2[-1, 1] 
-    # input_y_unit = 'm'
     x0 = initial_x_position
     y0 = initial_y_position
     x_initial_velocity = velo2[-1, 0] 
     y_initial_velocity = velo2[-1, 1]
     vx0 = x_initial_velocity
     vy0 = y_initial_velocity
-    # Unit conversion function for cases with different initial units
-    # status, x0, y0 = unit_converter_initialaltitude(initial_x_position, input_x_unit, initial_y_position, input_y_unit)
-    # if y0 == None or x0 == None:
-    #     return None, None, None, status
     pos, velo, ts, status = second_order_ex(x0, y0, vx0, vy0, tstep, max_steps)
     if pos is None:
         return None, None, None, status 
     return pos, velo, ts, status
-    # plot = plot_position_earth(pos[:,0],pos[:,1])
-    # return plot, status
+
 
     
