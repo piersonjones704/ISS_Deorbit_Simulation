@@ -77,7 +77,7 @@ def second_order_ex(x0, y0, vx0, vy0, tstep, max_steps):
     return posarray, varray, tarray, status
 
 # call euler simulation function with initial y, end time, and time step
-def reentry(pos2, velo2, tstep = 1.0, max_steps = 10000000):
+def reentry(pos2, velo2, tstep, max_steps):
     '''Takes final altitude, final velocity from orbital decay function, time intervals, and a max simulation duration, and calls the second_order_ex function to calculate the reentry position that will occur throughout the simulation run time
         returns the array of velocity, position, and time, for the simulation and whether or not the station hit the ground or remained in orbit, given the initial parameters'''
     # Parameters
