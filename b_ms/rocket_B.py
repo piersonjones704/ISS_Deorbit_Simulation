@@ -7,9 +7,10 @@ dry_mass = M_0_LV/MASS_RATIO_LV
 fuel_weight = wet_mass - dry_mass
 burn_time = (fuel_weight)/M_DOT_E_LV
 
+
 def thrust(t):
     '''calculates thrust as a function of time after t = 0'''
-    if t <= burn_time:
+    if t <= burn_time*0.76309:
         return M_DOT_E_LV*I_SP_LV*g_0
     else:
         return 0
@@ -60,11 +61,14 @@ def rocket(sim_time, t_step, h_0, v_0):
         h_plot[i] = h + t_step*v
         h = h_plot[i]
         if h >= 400000 and has_printed == False:
-            # print(f"to get to 400km, rocket has used {(wet_mass - m(t))/(fuel_weight)*100}% of the fuel")
+            print(f"to get to 400km, rocket has used {(wet_mass - m(116.98))/(fuel_weight)*100}% of the fuel")
+            # print(f"height is {h}")
+            # print(f"t is {t}")
             # print(f"current mass is {m(t)}")
             # print(f"dry mass is {dry_mass}")
             # print(f"wet mass is {wet_mass}")
             # print(f"fuel weight is {fuel_weight}")
+            # print(f"burn time is {burn_time}")
             has_printed = True
         t_plot[i] = t_plot[i-1] + t_step
         t += t_step
@@ -82,12 +86,12 @@ def rocket(sim_time, t_step, h_0, v_0):
 
 def main():
     # TODO: write me
-    sim_time = 8*burn_time
+    sim_time = 10*burn_time
     t_step = 0.01
     h_0 = 0
     v_0 = 0
     time, height, velocity, max = rocket(sim_time, t_step, h_0, v_0)
-    #print(max)
+    print(f"maximum height is {max}")
     plot_simple(time, height)
     #plot_simple(time, velocity)    
 
