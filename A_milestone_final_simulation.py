@@ -18,8 +18,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     fb_time = np.arange(0,final_burn_time,timestep)
     rt_time = np.arange(0, 8*rocket_burn_time, timestep)
     reentry_max_steps = 100000
-    pos = np.zeros((len(od_time)+len(fb_time),2))
-    vel = np.zeros((len(od_time)+len(fb_time),2))
+    pos = np.zeros((len(od_time)+len(fb_time)+(reentry_max_steps)+len(rt_time),2))
+    vel = np.zeros((len(od_time)+len(fb_time)+(reentry_max_steps)+len(rt_time),2))
     
     pos[0] = [0,altitude+R_EARTH]
     vel[0] = [velocity,0]
@@ -36,9 +36,11 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
         vel[ct2+1] = velnext
     ct3 = 0
     for ct3 in range(reentry_max_steps):
-        pos, vel = Runge_Kutta(reentry_accel,pos[ct3],vel[ct3],timestep)
+        posnext, velnext = Runge_Kutta(reentry_accel,pos[ct3],vel[ct3],timestep)
+        pos[ct3+1] = posnext
+        vel[ct3+1] = velnext
     ct4 = 0
-    for ct4 in range(rt_time):
+    for ct4 in range(len(rt_time)):
         posnext, velnext  = Runge_Kutta(rocket_accel,pos[ct4], vel[ct4], timestep)
         pos[ct4+1] = posnext
         vel[ct4+1] = velnext
@@ -46,4 +48,5 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     axs.plot(posnext, velnext)
     plt.show()
 
-    
+if __name__ == '__main__':
+    final_simulation(275000,7700,1,90,60)
