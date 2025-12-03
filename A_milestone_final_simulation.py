@@ -7,6 +7,11 @@ from Final_Burn_Acceleration_Function import *
 from Reentry_Acceleration_Function import *
 
 def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn_time):
+    '''
+    The main function simulate the three stages of the tractory of the ISS sation.
+    The main functions take the initial inputs of starting altitude, starting velocity, timestep, length of orbital decay stage, and length of final burn stage.
+    Returns a plot of the trajectory of the truss, and the distance travelled from breakup to splashdown.
+    '''
     od_time = np.arange(0,orbital_decay_time,timestep)
     fb_time = np.arange(0,final_burn_time,timestep)
     reentry_max_steps = 100000
