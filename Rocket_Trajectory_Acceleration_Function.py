@@ -5,10 +5,10 @@ import numpy as np
 wet_mass = M_0_LV
 dry_mass = M_0_LV/MASS_RATIO_LV
 fuel_weight = wet_mass - dry_mass
-burn_time = (fuel_weight)/M_DOT_E_LV
+rocket_burn_time = (fuel_weight)/M_DOT_E_LV
 
 def thrust(t):
-    if t <= burn_time:
+    if t <= rocket_burn_time:
         return M_DOT_E_LV*I_SP_LV*g_0
     else:
         return 0
