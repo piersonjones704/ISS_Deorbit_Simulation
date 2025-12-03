@@ -3,6 +3,9 @@ import math
 from constants import *
 
 def Runge_Kutta(accel,pos,vel,ts):
+    '''Processes Runge-Kutta numerical integration method
+       Takes parameters of acceleration function, 1D position array, 1D velocity array and timestep
+       Returns a new 1D position and 1D velocity array'''
     k1 = accel(pos,vel)
     l1 = vel
 

@@ -9,6 +9,11 @@ from Rocket_Trajectory_Acceleration_Function import *
 import matplotlib.pyplot as plt
 
 def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn_time):
+    '''
+    The main function simulate the three stages of the tractory of the ISS sation.
+    The main functions take the initial inputs of starting altitude, starting velocity, timestep, length of orbital decay stage, and length of final burn stage.
+    Returns a plot of the trajectory of the truss, and the distance travelled from breakup to splashdown.
+    '''
     od_time = np.arange(0,orbital_decay_time,timestep)
     fb_time = np.arange(0,final_burn_time,timestep)
     rt_time = np.arange(0, 8*rocket_burn_time, timestep)

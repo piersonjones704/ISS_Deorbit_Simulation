@@ -1,6 +1,7 @@
 # Our Super Awesome Project - ISS Deorbit Project
 
 ## Live Document Links
+
 Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2rmjjUFR3-em32RshCD2co25l5qMrgn1TTljqvA/edit?usp=sharing)
 
 ## Description
@@ -29,7 +30,8 @@ The scientific principles behind our project are:
 [Source](https://www.sciencedirect.com/science/article/abs/pii/S0094576524006143)
 
 ### Features
-This project is a numerical simulation of the deorbit of the ISS given a set of initial conditions. The simulation is divided into four distinct stages each represented by a function call:
+
+This project is a numerical simulation - provided by the Runge Kutta method - of the deorbit of the ISS given a set of initial conditions. The simulation is divided into four distinct stages each represented by a function call:
 1. orbital_decay
 2. final_burn
 3. reentry
@@ -41,29 +43,50 @@ The program calls 4 functions, orbital_decay, final_burn, reentry, and approx (i
 
 Each stage represents a portion of the process with differing external variables.
 
- Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
+Our project is able to simulate the deorbit of the ISS by dividing the proces into 4 smaller, manageable stages. Each represents a portion of the process with differing external variables and forces. The program allows initial conditions to be chosen for each stage of the product, which allows the effect small scale changes at any portion of the process to be clearly scene.
 
 ## Usage
 
-The use of the program requires the input of an initial altitude, velocity, simulation time, initial rocket altitude, initial rocket launch velocity, and rocket launch simulation time. The order of input is as follows:
+The use of the program requires the input of an initial ISS altitude, velocity, orbital decay simulation duration, final burn simulation duration, rocket altitude, rocket launch velocity, and rocket launch simulation time. The order of input is as follows:
 * Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
 * Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
-* Length of the simuation: How long the user wants the program to simulate for. (Given in minutes)
-* Initial rocket altitude: This is the height the rocket launch begins at (Given in kilometers)
-* Initial rocket launch velocity: The initial velocity of the rocket when it is launched (Given in meters per second)
-* Rocket launch simulation time: How long the rocket launch portion of the simulation should run (calculated based on additional factors such as wet mass, dry mass, and rocket exhaust mass flow rate)
+* Orbital Decay Simulation Duration: How long the user wants the orbital decay component to run for. (Given in minutes)
+* Final Burn Simuation Duration: How long the user wants the final burn component to run for. (Given in minutes)
+* Initial Rocket Altitude: This is the height the rocket launch begins at (Given in kilometers)
+* Initial Rocket Launch Velocity: The initial velocity of the rocket when it is launched (Given in meters per second)
+* Rocket Launch Simulation Duration: How long the rocket launch portion of the simulation should run (calculated based on additional factors such as wet mass, dry mass, and rocket exhaust mass flow rate)
 
 ### [Role 1] - Orbital Decay
+The orbital decay acceleration function corresponds to the second phase of the ISS simulation. It takes two parameters in the following order:
+1. A 1D position array given as [x-pos,y-pos] 
+2. A 1D velocity array given as [x-velo,y-velo]
+The orbital decay acceleration function returns a 1D accelerationa array given as [x-accel,y-accel].
+
+The orbital decay phase uses the Runge-Kutta method and 3 paramters taken from extraneous calculations:
+1. A 1D position array given as [x-pos,y-pos]
+2. A 1D velocity array given as [x-velo,y-velo]
+3. A timestep
+The orbital decay phase updates the simulation's 2D position and velocity arrays with 1D arrays of the position, [x,y] and velocity, [Vx,Vy] for every timestep of the simulation.
 
 ### [Role 2] - Final Burn
 
-Similar to the previous milestone, the final burn function is corresponded to the second phase of the whole function. the final burn function takes three parameters:
+Similar to the previous milestone, the final burn function is corresponded to the second phase of the whole function. the final burn function takes four parameters:
 
-* final position of the rocket (x and y coordinate) from stage 1 as the initial position of stage 2
+* final position of the ISS (x and y coordinate) from stage 1 as the initial position of stage 2
 * final velocity (x and y components) from stage 1 as the initial velocity of stage 2
-* tstep, which is repsonsible for controlling how long the simulation is going to run.
+* final burn simulation time, which is responsible for controlling how long this portion of the simulation is ran 
+* tstep, which is responsible for controlling the interval at which data is calculated and plotted 
 
 ### [Role 3] - Reentry Trajectory
+
+Similar to the previous milestone, the reentry function corresponds to the third phase of the whole simulation. It takes three parameters:
+
+* final position of the ISS (x and y coordinate) from the final burn stage as the initial position for this stage
+* final velocity (x and y components) from the final burn stage as the initial velocity for this stage
+* tstep, which is responsible for controlling the interval at which data is calculated and plotted 
+* max_steps which is responsible for controlling how long this portion of the simulation is ran 
+
+With the input of these parameters, the function will run, simulating the reentry trajectory of the ISS. Unlike the previous milestone, this reentry component will simulate the ISS's travel until it reaches an altitude of 100 km. Once it reaches this alitutde, it will model the ISS and truss separating during its descent. With the separation of these components the truss's position and velocity will be calculated and plotted to its point of impact.
 
 ### [Role 4] - Rocket Trajectory
 
@@ -73,7 +96,7 @@ Similar to the previous milestone, the final burn function is corresponded to th
 
 Our roadmap through this project can be split into three phases so far: background research, individual stages coding and final integration. 
 
-During the background research stage, our background research focus on the foundation of domain knowledge for an ISS deorbit milestone by explaining what the ISS is, why and how it will be decommissioned, the key safety and physical considerations involved, and the scientific principles—laws, forces, trajectories, and numerical methods—needed for each role to model the deorbit process accurately. 
+During the background research stage, our background research focused on the foundation of domain knowledge for an ISS deorbit milestone by explaining what the ISS is, why and how it will be decommissioned, the key safety and physical considerations involved, and the scientific principles—laws, forces, trajectories, and numerical methods—needed for each role to model the deorbit process accurately. 
 
 Through this background research, we then divided each section to a designated member to write code for each individual stage of the iss deorbit simulation, which includes orbital decay, final burn, reentry trajectory and the rocket trajectory stages. we then coded each simulation using the parameters given and imported matplotlib to plot our individual simulation. 
 
