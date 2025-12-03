@@ -3,6 +3,10 @@ from c_ms.constants import *
 import math
 
 def final_burn_accel(pos, vel):
+      """
+      This function takes in an initial value of position and velocity
+      And returns an array value of accelaration throughout the final burn phase.
+      """
       thrust = 3236
       Cd = 2.07
       A = 1000.0
