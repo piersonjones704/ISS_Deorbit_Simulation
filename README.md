@@ -57,6 +57,16 @@ The use of the program requires the input of an initial ISS altitude, velocity, 
 * Rocket Launch Simulation Duration: How long the rocket launch portion of the simulation should run (calculated based on additional factors such as wet mass, dry mass, and rocket exhaust mass flow rate)
 
 ### [Role 1] - Orbital Decay
+The orbital decay acceleration function corresponds to the second phase of the ISS simulation. It takes two parameters in the following order:
+1. A 1D position array given as [x-pos,y-pos] 
+2. A 1D velocity array given as [x-velo,y-velo]
+The orbital decay acceleration function returns a 1D accelerationa array given as [x-accel,y-accel].
+
+The orbital decay phase uses the Runge-Kutta method and 3 paramters taken from extraneous calculations:
+1. A 1D position array given as [x-pos,y-pos]
+2. A 1D velocity array given as [x-velo,y-velo]
+3. A timestep
+The orbital decay phase updates the simulation's 2D position and velocity arrays with 1D arrays of the position, [x,y] and velocity, [Vx,Vy] for every timestep of the simulation.
 
 ### [Role 2] - Final Burn
 
