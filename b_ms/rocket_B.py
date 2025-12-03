@@ -86,7 +86,7 @@ def rocket(sim_time, t_step, h_0, v_0):
 
 def main():
     # TODO: write me
-    sim_time = 10*burn_time
+    sim_time = 8*burn_time
     t_step = 0.01
     h_0 = 0
     v_0 = 0
