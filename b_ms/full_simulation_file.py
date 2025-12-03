@@ -7,7 +7,7 @@ from final_burn_B_ import final_burn
 from reentry_B_ import reentry
 from rocket_B import rocket
 
-def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps,  testing=False):
+def full_sim(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps,  testing=False):
     '''
     The main function simulate the four stages of the tractory of the ISS sation.
     The main functions take initial input such as starting altitude, starting velocity, simulation time of both the iss station and the rocket.
@@ -57,10 +57,8 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
     '''
     if not testing:
         print('ISS Deorbit Stage 3: Reentry')
-    pos3, velo3, ts3, status3 = reentry(pos2, velo2, tstep, reentry_max_steps)
+    pos3, velo3, ts3, status3 = reentry(pos2, velo2, reentry_tstep, reentry_max_steps)
     if pos3 is None or velo3 is None or ts3 is None:
-        return status3
-    elif status3 == 'hit ground':
         return status3
     final_altitude_3 = np.abs(np.linalg.norm(pos3[-1]) - R_EARTH) / 1000
     final_velocity_3 = np.linalg.norm(velo3[-1])
@@ -100,25 +98,26 @@ def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, 
         plt.plot((pos3[:, 0][0]), (pos3[:, 1][0]), 'ko', pos3[:,0], pos3[:, 1], 'k-', (pos3[:, 0][-1]), (pos3[:, 1][-1]), 'k^')
         plt.axis('equal')
         plt.show()
+    return status3
 
+def main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps, testing=False):
     # Status of ISS
-    final_ISS_status = status3
+    final_ISS_status = full_sim(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps)
     if not testing:
-        print(final_ISS_status)
-    return final_ISS_status
+        print(f"Final ISS Status: {final_ISS_status}")
 
 if __name__ == '__main__':
-    reentry_tstep = None
     starting_altitude = 275
     input_units = 'km'
     starting_velo = 7700
     orbital_decay_sim_time = 90
+    reentry_tstep = 0.01
+    reentry_max_steps = 1000000
     initial_rocket_launch_altitude = 0
     initial_rocket_launch_velo = 0
     wet_mass = M_0_LV
     dry_mass = M_0_LV/MASS_RATIO_LV
     burn_time = (wet_mass - dry_mass)/M_DOT_E_LV
     rocket_launch_sim_time = 8 * burn_time
-    tstep = 0.1
-    reentry_max_steps = 100000
+    tstep = 0.01
     main(starting_altitude, input_units, starting_velo, orbital_decay_sim_time, initial_rocket_launch_altitude, initial_rocket_launch_velo, rocket_launch_sim_time, tstep, reentry_max_steps)
