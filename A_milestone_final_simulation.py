@@ -16,8 +16,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     The main functions take the initial inputs of starting altitude, starting velocity, timestep, length of orbital decay stage, and length of final burn stage.
     Returns a plot of the trajectory of the truss, and the distance travelled from breakup to splashdown.
     '''
-    od_time = np.arange(0,orbital_decay_time,timestep)
-    fb_time = np.arange(0,final_burn_time,timestep)
+    od_time = np.arange(0,orbital_decay_time*60,timestep)
+    fb_time = np.arange(0,final_burn_time*60,timestep)
     rt_time = np.arange(0, 8*rocket_burn_time, timestep)
     od_steps = int(orbital_decay_time / timestep)
     fb_steps = int(final_burn_time / timestep)
