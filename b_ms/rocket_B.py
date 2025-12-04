@@ -61,7 +61,7 @@ def rocket(sim_time, t_step, h_0, v_0):
         h_plot[i] = h + t_step*v
         h = h_plot[i]
         if h >= 400000 and has_printed == False:
-            print(f"to get to 400km, rocket has used {(wet_mass - m(116.98))/(fuel_weight)*100}% of the fuel")
+            # print(f"to get to 400km, rocket has used {(wet_mass - m(116.98))/(fuel_weight)*100}% of the fuel")
             # print(f"height is {h}")
             # print(f"t is {t}")
             # print(f"current mass is {m(t)}")
