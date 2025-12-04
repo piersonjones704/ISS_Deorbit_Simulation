@@ -10,7 +10,7 @@ from Rocket_Trajectory_Acceleration_Function import *
 from A_ms_plotting import plot_final_simulation
 
 
-def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time):
+def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = False):
     '''
     The main function simulate the three stages of the tractory of the ISS sation.
     The main functions take the initial inputs of starting altitude, starting velocity, timestep, length of orbital decay stage, and length of final burn stage.
@@ -34,6 +34,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     time[0] = 0.0
     interval = 0
 
+
     # Orbital Decay Phase
     for i in range(od_steps - 1):
         posnext, velnext = Runge_Kutta(orbital_decay_accel,pos[interval],vel[interval],timestep)
@@ -41,8 +42,13 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         pos[interval] = posnext
         vel[interval] = velnext
         time[interval] = time[interval - 1] + timestep
-    print(f"Orbital Decay Final Altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
-
+    print(f"Orbital Decay Final Altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
+    if (np.linalg.norm(pos[interval]) - R_EARTH)/1000 == 0:
+        status1 = 'hit ground'
+        return status1
+    else:   
+        status1 = 'orbiting or escaped orbit'
+        
 
     # Final Burn Phase
     for i in range(fb_steps - 1):
@@ -51,17 +57,20 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         pos[interval] = posnext
         vel[interval] = velnext
         time[interval] = time[interval - 1] + timestep
-    print(f"Final Burn Final Altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
+    print(f"Final Burn Final Altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
+    if (np.linalg.norm(pos[interval]) - R_EARTH)/1000 == 0:
+        status2 = 'hit ground'
+        return status2
+    else:   
+        status2 = 'orbiting or escaped orbit'
 
 
     # Reentry Phase
-    print(f"Initial reentry altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
-    print(f"Initial reentry velocity: {np.linalg.norm(vel[interval]):.2f} m/s")
     separation_pos = None
     separation_vel = None
     impact_pos = None
     impact_vel = None
-    status = 'orbiting or escaped orbit'
+    status3 = 'orbiting or escaped orbit'
     for i in range(reentry_max_steps):
         current_pos = pos[interval]
         current_vel = vel[interval]
@@ -75,7 +84,6 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
             if abs(altitude_change) > 1e-12:
                 fraction_to_separation = (current_altitude - separation_altitude) / altitude_change
                 fraction_to_separation = max(0.0, min(1.0, fraction_to_separation))
-
             else:
                 fraction_to_separation = 0.0
             # interpolated separation position
@@ -93,12 +101,11 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
             # interpolate impact position on Earth surface
             impact_pos = (current_pos + fraction_to_impact * (posnext - current_pos))
             impact_vel = current_vel + fraction_to_impact * (velnext - current_vel)
-
             # replace last stored with interpolated impact
             pos[interval] = impact_pos
             vel[interval] = impact_vel
             time[interval] = time[interval - 1] + fraction_to_impact * timestep
-            status = 'hit ground'
+            status3 = 'hit ground'
             break
         interval += 1
         pos[interval] = posnext
@@ -109,7 +116,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     pos = pos[:interval+1]
     vel = vel[:interval+1]
     time = time[:interval+1]
-    print(f"Final altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
+    print(f"Final altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
     print(f"Total simulation time: {time[interval]:.1f} seconds ({time[interval]/60:.1f} minutes)")
     # If no separation occurred, go to starting point
     reentry_start_interval = len(od_time) + len(fb_time)
@@ -133,6 +140,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         # Surface arc distance
         horizontal_distance_meters = R_EARTH * central_angle_rad
         print(f"Horizontal distance from 100 km separation to splashdown: {horizontal_distance_meters:.1f} meters")
+
 
     # Rocket Trajectory Phase
     # ct4 = 0
@@ -161,14 +169,19 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     
     max_altitude = (np.max(rocket_pos))/ 1000
     final_altitude = (np.linalg.norm(rocket_pos[-1]) - R_EARTH) / 1000
-    print(f"\nRocket maximum altitude: {max_altitude:.2f} km")
+    print(f"Rocket maximum altitude: {max_altitude:.2f} km")
     print(f"Rocket final altitude: {final_altitude:.2f} km")
 
     # Plotting
     plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos, rocket_time)
-    # axs, figs = plt.subplots(1, 1)
-    # axs.plot(posnext, velnext)
     plt.show()
+    return status3
+    
+def main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = False):
+    # Status of ISS
+    final_ISS_status = final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = False)
+    if not testing:
+        print(f"Final ISS Status: {final_ISS_status}")
 
 if __name__ == '__main__':
-    final_simulation(275000,7700,0.1,90*60,60*60)
+    main(275000,7700,0.1,90*60,60*60)

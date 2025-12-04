@@ -6,8 +6,8 @@ import math
 def orbital_decay_accel(pos,vel):
     '''
     Function that returns the acceleration of the ISS, while it's in orbital decay phase for each position.
-    Take 1D position and velocity arrays.
-    Returns 1D acceleration array, given as [ax,ay].
+    Take 2D position and velocity arrays.
+    Returns 2D acceleration array, given as [ax,ay].
     '''
     x = pos[0]
     y = pos[1]
