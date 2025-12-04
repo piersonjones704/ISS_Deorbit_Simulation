@@ -3,6 +3,8 @@ from constants import *
 import math
 
 def reentry_accel(pos, vel):
+    '''Function that returns the acceleration of the ISS, while it's in reentry phase for each position.
+    Takes 2D position and velocity arrays. Returns 2D acceleration array, given as [ax,ay].'''
     x = pos[0]
     y = pos[1] 
     vx = vel[0]
