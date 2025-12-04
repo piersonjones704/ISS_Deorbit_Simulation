@@ -31,7 +31,7 @@ def grav_force(t, h):
     return g_0*m(t)
 
 
-def rocket_accel(t, h, v):
+def rocket_accel(h, v, t):
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
 
 

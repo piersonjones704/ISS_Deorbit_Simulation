@@ -18,32 +18,34 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     fb_time = np.arange(0,final_burn_time,timestep)
     rt_time = np.arange(0, 8*rocket_burn_time, timestep)
     reentry_max_steps = 100000
-    pos = np.zeros((len(od_time)+len(fb_time)+(reentry_max_steps)+len(rt_time),2))
-    vel = np.zeros((len(od_time)+len(fb_time)+(reentry_max_steps)+len(rt_time),2))
+    pos = np.zeros((len(od_time)+len(fb_time)+(reentry_max_steps),2))
+    vel = np.zeros((len(od_time)+len(fb_time)+(reentry_max_steps),2))
+    rocpos = np.zeros(len(rt_time))
+    rocvel = np.zeros(len(rt_time))
     
     pos[0] = [0,altitude+R_EARTH]
     vel[0] = [velocity,0]
 
     ct1 = 0
-    for ct1 in range(len(od_time)):
-        posnext, velnext = Runge_Kutta(orbital_decay_accel,pos[ct1],vel[ct1],timestep)
-        pos[ct1+1] = posnext
-        vel[ct1+1] = velnext
+    for ct1 in range(1,len(od_time)):
+        posnext, velnext = Runge_Kutta(orbital_decay_accel,pos[ct1-1],vel[ct1-1],timestep)
+        pos[ct1] = posnext
+        vel[ct1] = velnext
     ct2 = 0
-    for ct2 in range(len(fb_time)):
-        posnext, velnext = Runge_Kutta(final_burn_accel,pos[ct2],vel[ct2],timestep)
-        pos[ct2+1] = posnext
-        vel[ct2+1] = velnext
+    for ct2 in range(1,len(fb_time)):
+        posnext, velnext = Runge_Kutta(final_burn_accel,pos[ct2-1],vel[ct2-2],timestep)
+        pos[ct2] = posnext
+        vel[ct2] = velnext
     ct3 = 0
-    for ct3 in range(reentry_max_steps):
-        posnext, velnext = Runge_Kutta(reentry_accel,pos[ct3],vel[ct3],timestep)
-        pos[ct3+1] = posnext
-        vel[ct3+1] = velnext
+    for ct3 in range(1,reentry_max_steps):
+        posnext, velnext = Runge_Kutta(reentry_accel,pos[ct3-1],vel[ct3-1],timestep)
+        pos[ct3] = posnext
+        vel[ct3] = velnext
     ct4 = 0
-    for ct4 in range(len(rt_time)):
-        posnext, velnext  = Runge_Kutta(rocket_accel,pos[ct4], vel[ct4], timestep)
-        pos[ct4+1] = posnext
-        vel[ct4+1] = velnext
+    for ct4 in range(1,len(rt_time)):
+        posnext, velnext  = Runge_Kutta(rocket_accel,rocpos[ct4-1], rocvel[ct4-1], timestep, rt_time[ct4-1])
+        rocpos[ct4] = posnext
+        rocvel[ct4] = velnext
     axs, figs = plt.subplots(1, 1)
     axs.plot(posnext, velnext)
     plt.show()
