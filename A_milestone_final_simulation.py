@@ -21,8 +21,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     od_time = np.arange(0,orbital_decay_time*60,timestep)
     fb_time = np.arange(0,final_burn_time*60,timestep)
     rt_time = np.arange(0, 8*rocket_burn_time, timestep)
-    od_steps = int(orbital_decay_time / timestep)
-    fb_steps = int(final_burn_time / timestep)
+    od_steps = int(orbital_decay_time*60/ timestep)
+    fb_steps = int(final_burn_time*60 / timestep)
     reentry_max_steps = 100000
 
     separation_altitude = 100000       # in meters
@@ -180,19 +180,22 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     
     max_altitude = (np.max(rocket_pos))/ 1000
     final_altitude = (np.linalg.norm(rocket_pos[-1])) / 1000
-    print(f"Rocket maximum altitude: {max_altitude:.2f} km")
-    print(f"Rocket final altitude: {final_altitude:.2f} km")
+    if not testing:
+        print(f"Rocket maximum altitude: {max_altitude:.2f} km")
+        print(f"Rocket final altitude: {final_altitude:.2f} km")
 
     # Plotting
-    plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos, rocket_time)
-    plt.show()
+    if not testing:
+        plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos, rocket_time)
+        plt.show()
     return status3
     
 def main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = False):
     # Status of ISS
-    final_ISS_status = final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = False)
+
+    final_ISS_status = final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = testing)
     if not testing:
         print(f"Final ISS Status: {final_ISS_status}")
-
+    return final_ISS_status
 if __name__ == '__main__':
     main(275000,7700,0.1,90,60)

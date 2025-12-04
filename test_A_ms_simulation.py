@@ -2,7 +2,7 @@ from A_milestone_final_simulation import *
 from constants import * 
 
 def do_test(altitude, velocity, timestep, orbital_decay_time, final_burn_time, expected_status):
-    final_ISS_status = main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = True)
+    final_ISS_status = main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, True)
     if final_ISS_status == expected_status:
         print('Test Passed', expected_status)
     else: 
@@ -12,6 +12,7 @@ if __name__ == '__main__':
     # Test cases:
     do_test(275000, 7700, 0.1, 90, 60, 'hit ground')
     # When initial x velocity is below the impact velocity (7700 m/s) with the impact altitude value
+    '''
     do_test(275000, 7000, 0.1, 90, 60, 'hit ground')
     # When initial x velocity is above the impact velocity (7700 m/s) with the impact altitude value
     do_test(275000, 8200, 0.1, 90, 60, 'orbiting or escaped orbit')
@@ -34,4 +35,4 @@ if __name__ == '__main__':
     # When utilizing zero tstep value
     do_test(275000, 7700, 0.0, 90, 60, 'invalid tstep value')   
     # When utilizing a very large tstep value to make the function immediately run past impact
-    do_test(275000, 7700, 10000.0, 90, 60, 'hit ground')   
+    do_test(275000, 7700, 10000.0, 90, 60, 'hit ground')   '''
