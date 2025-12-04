@@ -29,4 +29,4 @@ def final_burn_accel(pos, vel):
       drag = -0.5 * rho * Cd * A * v**2 * v_unit
       thrust_vec = -thrust * v_unit
       acc = g_vec + (drag + thrust_vec) / m
-      return np.array([acc])
+      return acc
