@@ -186,7 +186,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
 
     # Plotting
     if not testing:
-        plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos, rocket_time)
+        plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos/1000, rocket_time)
         plt.show()
     return status3
     
