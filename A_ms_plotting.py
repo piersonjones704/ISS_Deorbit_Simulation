@@ -52,8 +52,7 @@ def plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_
     ax_map.grid(True)
     
     # Rocket Altitude vs. Time plot
-    rocket_altitude = (np.linalg.norm(rocket_pos, axis=1) - R_EARTH) / 1000
-    ax_alt.plot(rocket_time, rocket_altitude, 'b-', linewidth=2)
+    ax_alt.plot(rocket_time, rocket_pos, 'b-', linewidth=2)
     ax_alt.set_xlabel('Time (s)', fontsize=11)
     ax_alt.set_ylabel('Altitude (km)', fontsize=11)
     ax_alt.set_title('Rocket Launch Trajectory', fontsize=13, fontweight='bold')

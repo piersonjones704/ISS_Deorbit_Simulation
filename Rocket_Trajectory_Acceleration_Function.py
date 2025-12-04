@@ -8,7 +8,7 @@ fuel_weight = wet_mass - dry_mass
 rocket_burn_time = (fuel_weight)/M_DOT_E_LV
 
 def thrust(t):
-    if t <= rocket_burn_time:
+    if t <= rocket_burn_time*0.7629:
         return M_DOT_E_LV*I_SP_LV*g_0
     else:
         return 0
@@ -27,11 +27,11 @@ def m(t):
         return dry_mass  
     
 def grav_force(t, h):
-    #return (G*M_EARTH*m(t))/(R_EARTH + h)**2
-    return g_0*m(t)
+    return (G*M_EARTH*m(t))/(R_EARTH + h)**2
+    #return g_0*m(t)
 
 
-def rocket_accel(t, h, v):
+def rocket_accel(h, v, t):
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
 
 
