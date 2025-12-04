@@ -143,11 +143,6 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
 
 
     # Rocket Trajectory Phase
-    # ct4 = 0
-    # for ct4 in range(len(rt_time)):
-    #     posnext, velnext  = Runge_Kutta(rocket_accel,pos[ct4], vel[ct4], timestep)
-    #     pos[ct4+1] = posnext
-    #     vel[ct4+1] = velnext
     rocket_pos = np.zeros((len(rt_time)))
     rocket_vel = np.zeros((len(rt_time)))
     rocket_time = np.zeros(len(rt_time))
@@ -155,20 +150,22 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     rocket_pos[0] = 0.0
     rocket_vel[0] = 0.0
     rocket_time[0] = 0.0
+    has_launched = False
     for i in range(len(rt_time) - 1):
         posnext, velnext = Runge_Kutta(rocket_accel, rocket_pos[i], rocket_vel[i], timestep, rt_time[i])
         rocket_pos[i + 1] = posnext
         rocket_vel[i + 1] = velnext
         rocket_time[i + 1] = rocket_time[i] + timestep
-        # Check if rocket hit ground
-        if np.linalg.norm(rocket_pos[i + 1]) <= R_EARTH:
-            rocket_pos = rocket_pos[:i + 2]
-            rocket_vel = rocket_vel[:i + 2]
-            rocket_time = rocket_time[:i + 2]
+        has_launched = True
+        #Check if rocket hit ground
+        if rocket_pos[i + 1] <= 0 and has_launched == True:
+            rocket_pos = rocket_pos[:i]
+            rocket_vel = rocket_vel[:i]
+            rocket_time = rocket_time[:i]
             break
     
     max_altitude = (np.max(rocket_pos))/ 1000
-    final_altitude = (np.linalg.norm(rocket_pos[-1]) - R_EARTH) / 1000
+    final_altitude = (np.linalg.norm(rocket_pos[-1])) / 1000
     print(f"Rocket maximum altitude: {max_altitude:.2f} km")
     print(f"Rocket final altitude: {final_altitude:.2f} km")
 
