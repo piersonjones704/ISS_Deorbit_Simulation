@@ -1,14 +1,16 @@
 import math
 import numpy as np
 from constants import *
+import matplotlib.pyplot as plt
 from Runge_Kutta_Integration_Interface import *
 from Orbital_Decay_Acceleration_Function import *
 from Final_Burn_Acceleration_Function import *
 from Reentry_Acceleration_Function import *
 from Rocket_Trajectory_Acceleration_Function import *
-import matplotlib.pyplot as plt
+from A_ms_plotting import plot_final_simulation
 
-def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn_time):
+
+def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time):
     '''
     The main function simulate the three stages of the tractory of the ISS sation.
     The main functions take the initial inputs of starting altitude, starting velocity, timestep, length of orbital decay stage, and length of final burn stage.
@@ -17,6 +19,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     od_time = np.arange(0,orbital_decay_time,timestep)
     fb_time = np.arange(0,final_burn_time,timestep)
     rt_time = np.arange(0, 8*rocket_burn_time, timestep)
+    od_steps = int(orbital_decay_time / timestep)
+    fb_steps = int(final_burn_time / timestep)
     reentry_max_steps = 100000
     separation_altitude = 100000       # in meters
     total_rows = len(od_time)+len(fb_time)+(reentry_max_steps)+len(rt_time)
@@ -26,28 +30,31 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     pos[0] = [0.0,altitude+R_EARTH]
     vel[0] = [velocity,0.0]
     time[0] = 0.0
-    
+    interval = 0
 
     # Orbital Decay Phase
-    interval = 0
-    for i in range(len(od_time)):
+    for i in range(od_steps - 1):
         posnext, velnext = Runge_Kutta(orbital_decay_accel,pos[interval],vel[interval],timestep)
         interval += 1
         pos[interval] = posnext
         vel[interval] = velnext
         time[interval] = time[interval - 1] + timestep
+    print(f"Orbital Decay Final Altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
 
 
     # Final Burn Phase
-    for i in range(len(fb_time)):
+    for i in range(fb_steps - 1):
         posnext, velnext = Runge_Kutta(final_burn_accel,pos[interval],vel[interval],timestep)
         interval += 1
         pos[interval] = posnext
         vel[interval] = velnext
         time[interval] = time[interval - 1] + timestep
+    print(f"Final Burn Final Altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
 
 
     # Reentry Phase
+    print(f"Initial reentry altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
+    print(f"Initial reentry velocity: {np.linalg.norm(vel[interval]):.2f} m/s")
     separation_pos = None
     separation_vel = None
     impact_pos = None
@@ -56,8 +63,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     for i in range(reentry_max_steps):
         current_pos = pos[interval]
         current_vel = vel[interval]
-        posnext, velnext = Runge_Kutta(reentry_accel, pos[interval], vel[interval], timestep)
         current_altitude = math.hypot(pos[interval, 0], pos[interval, 1]) - R_EARTH
+        posnext, velnext = Runge_Kutta(reentry_accel, pos[interval], vel[interval], timestep)
         next_altitude = math.hypot(posnext[0], posnext[1]) - R_EARTH
         # Determine accurate separation altitude
         if separation_pos is None and next_altitude <= separation_altitude:
@@ -100,6 +107,8 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
     pos = pos[:interval+1]
     vel = vel[:interval+1]
     time = time[:interval+1]
+    print(f"Final altitude: {(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
+    print(f"Total simulation time: {time[interval]:.1f} seconds ({time[interval]/60:.1f} minutes)")
     # If no separation occurred, go to starting point
     reentry_start_interval = len(od_time) + len(fb_time)
     if separation_pos is None:
@@ -123,16 +132,41 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time,final_burn
         horizontal_distance_meters = R_EARTH * central_angle_rad
         print(f"Horizontal distance from 100 km separation to splashdown: {horizontal_distance_meters:.1f} meters")
 
-
     # Rocket Trajectory Phase
-    ct4 = 0
-    for ct4 in range(len(rt_time)):
-        posnext, velnext  = Runge_Kutta(rocket_accel,pos[ct4], vel[ct4], timestep)
-        pos[ct4+1] = posnext
-        vel[ct4+1] = velnext
-    axs, figs = plt.subplots(1, 1)
-    axs.plot(posnext, velnext)
+    # ct4 = 0
+    # for ct4 in range(len(rt_time)):
+    #     posnext, velnext  = Runge_Kutta(rocket_accel,pos[ct4], vel[ct4], timestep)
+    #     pos[ct4+1] = posnext
+    #     vel[ct4+1] = velnext
+    rocket_pos = np.zeros((len(rt_time), 2))
+    rocket_vel = np.zeros((len(rt_time), 2))
+    rocket_time = np.zeros(len(rt_time))
+    # Initial conditions for rocket (ground launch, vertical)
+    rocket_pos[0] = [0.0, R_EARTH]
+    rocket_vel[0] = [0.0, 0.0]
+    rocket_time[0] = 0.0
+    for i in range(len(rt_time) - 1):
+        posnext, velnext = Runge_Kutta(rocket_accel, rocket_pos[i], rocket_vel[i], timestep)
+        rocket_pos[i + 1] = posnext
+        rocket_vel[i + 1] = velnext
+        rocket_time[i + 1] = rocket_time[i] + timestep
+        # Check if rocket hit ground
+        if np.linalg.norm(rocket_pos[i + 1]) <= R_EARTH:
+            rocket_pos = rocket_pos[:i + 2]
+            rocket_vel = rocket_vel[:i + 2]
+            rocket_time = rocket_time[:i + 2]
+            break
+    
+    max_altitude = (np.max(np.linalg.norm(rocket_pos, axis=1)) - R_EARTH) / 1000
+    final_altitude = (np.linalg.norm(rocket_pos[-1]) - R_EARTH) / 1000
+    print(f"\nRocket maximum altitude: {max_altitude:.2f} km")
+    print(f"Rocket final altitude: {final_altitude:.2f} km")
+
+    # Plotting
+    plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos, rocket_time)
+    # axs, figs = plt.subplots(1, 1)
+    # axs.plot(posnext, velnext)
     plt.show()
 
 if __name__ == '__main__':
-    final_simulation(275000,7700,1,90,60)
+    final_simulation(275000,7700,0.1,90*60,60*60)
