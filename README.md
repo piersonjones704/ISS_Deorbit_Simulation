@@ -93,17 +93,15 @@ With the input of these parameters, the function will run, simulating the reentr
 ## Testing
 
 ### Orbital Decay, Final Burn, and Reentry Testing
-The full testing file checks each components of the ISS simulation, including unit conversions, how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. 
 
-The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based on the inputs. These strings are integrated throughout the individual functions for every stage, except for "Rocket Trajectory." This is because orbital decay, final burn, and reentry are the stages of the ISS's deorbit, while the rocket's launch trajectory is a separate stage from the ISS's position and velocity during its deorbit - "Rocket Trajectory" will get its own testing overview. These strings are validated by determining whether the altitude ever reaches zero during the function to output a "hit ground" status or a "orbiting or escaped orbit" status if it did not make impact. The file "test_full_simulation.py" executes the testing, printing "Test Passed" with the expected output or "Test Failed" with the expected output and the actual output. The provided tests in the file cover:
+The full testing file checks each components of the ISS simulation, including how to handle invalid inputs - such as negative step sizes - and condiditons for the ISS to maintain orbit or escape orbit, and conditions for the ISS to impact the ground. 
+
+The testing file utilizes strings to verify whether the program is running correctly, returning status messages such as "hit ground" or "invalid tstep value" based on the inputs. These strings are integrated throughout the full simulation function for every stage, except for "Rocket Trajectory." This is because orbital decay, final burn, and reentry are the stages of the ISS's deorbit, while the rocket's launch trajectory is a separate stage from the ISS's position and velocity during its deorbit - "Rocket Trajectory" will get its own testing overview. These strings are validated by determining whether the altitude ever reaches zero during the function to output a "hit ground" status or a "orbiting or escaped orbit" status if it did not make impact. The file "test_A_ms_simulation.py" executes the testing, printing "Test Passed" with the expected output or "Test Failed" with the expected output and the actual output. The provided tests in the file cover:
 - ISS orbit and impact behavior: verifies using an expected outcome for different initial altitudes and velocity.
-- Unit conversions: kilometers, meters, centimeters, feet, miles, and invalid unit inputs
-- Input validation: ensures negative or zero "tstep" and "max_steps" values produce the correct error messages
-- Edge cases: tests were included for an initial altitude of zero, very large time steps - "tstep" - and small and zero "max_steps" values.
+- Input validation: ensures negative or zero "tstep" values produce the correct error messages
+- Edge cases: tests were included for an initial altitude of zero and very large time steps - "tstep" - values.
 
 To know that a testing function output is correct, the output line should state, "Test Passed". A "Test Failed" line suggests there is either an error in the function, causing it to produce the wrong value, or the expected value is incorrect.
-
-In Phase 3 for this simulation component, it would be useful to create means of distinguishing between the ISS maintaining orbit and it escaping orbit; currently, they are grouped as one status rather than two. Additionally, incorporating the ability to test an initial y velocity parameter and testing negative velocities would be interesting.
 
 ### Rocket Trajectory Testing
 
