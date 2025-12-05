@@ -176,8 +176,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
             rocket_pos = rocket_pos[:i]
             rocket_vel = rocket_vel[:i]
             rocket_time = rocket_time[:i]
-            break
-    
+            break 
     max_altitude = (np.max(rocket_pos))/ 1000
     final_altitude = (np.linalg.norm(rocket_pos[-1])) / 1000
     if not testing:
@@ -186,16 +185,17 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
 
     # Plotting
     if not testing:
-        plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos/1000, rocket_time)
+        plot_final_simulation(pos, time, od_steps, fb_steps, separation_pos, impact_pos, rocket_pos, rocket_time)
         plt.show()
     return status3
     
 def main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = False):
+    '''The function that calls the final_simulation file and uses its output to print the final status of the ISS. Returns the final status of the ISS as well.'''
     # Status of ISS
-
     final_ISS_status = final_simulation(altitude, velocity, timestep, orbital_decay_time, final_burn_time, testing = testing)
     if not testing:
         print(f"Final ISS Status: {final_ISS_status}")
     return final_ISS_status
+
 if __name__ == '__main__':
     main(275000,7700,0.1,90,60)

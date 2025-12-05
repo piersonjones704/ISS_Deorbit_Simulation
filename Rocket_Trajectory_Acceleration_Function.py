@@ -32,6 +32,8 @@ def grav_force(t, h):
 
 
 def rocket_accel(h, v, t):
+    '''Function that returns the acceleration of the launch vehicle rocket.
+    Takes altitude, velocity magnitude, and time as scalars. Returns scalar acceleration.'''
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
 
 

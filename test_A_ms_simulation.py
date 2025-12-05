@@ -2,6 +2,9 @@ from A_milestone_final_simulation import *
 from constants import * 
 
 def do_test(altitude, velocity, timestep, orbital_decay_time, final_burn_time, expected_status):
+    '''This function tests the full simulation file, testing whether the produced output matches the expected. This output is in the 
+    form of the ISS's status (whether it hit the ground, stayed in orbit, or escaped orbit). This function can run through multiple test 
+    cases and prints whether the test passed - and the output - or failed, and what its expected output is vs. what it actually output.'''
     final_ISS_status = main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, True)
     if final_ISS_status == expected_status:
         print('Test Passed', expected_status)
