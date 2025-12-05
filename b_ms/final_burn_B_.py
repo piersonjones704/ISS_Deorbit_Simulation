@@ -4,12 +4,17 @@ import math
 import numpy as np
 
 def final_burn(altitude, velocity, time_minutes):
+    '''
+    stage 2, this is the simulation of final burn.
+    the function takes in starting altitude, starting velocity and a the chosen simulation time for this section of simulation.
+    the function will then plot the tracjectory of the station and return the final position and final velocity of the station.
+    '''
     # Constants
     thrust = 3236
     Cd = 2.07
     A = 1000.0
     m = 480000.0
-    rho = 3.8e-12
+    rho = RHO_0*np.exp(-(altitude/7500))
 
     # Initial conditions
     altitude = np.array([altitude[-1,:]])

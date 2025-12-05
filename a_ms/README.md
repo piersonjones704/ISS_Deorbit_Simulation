@@ -35,11 +35,11 @@ This project is a numerical simulation - provided by the Runge Kutta method - of
 1. orbital_decay
 2. final_burn
 3. reentry
-4. approx
+4. rocket
 
-Each stage models a different portion of the process with differing external variables and forces. The functions are called sequentially, with the final position and velocity of each being used as the initial condition of the subsequent function, excluding approx which has initial conditions provided by function parameters.
+Each stage models a different portion of the process with differing external variables and forces. The functions are called sequentially, with the final position and velocity of each being used as the initial condition of the subsequent function, excluding rocket which has initial conditions provided by function parameters.
 
-The program calls 4 functions, orbital_decay, final_burn, reentry, and approx (in that order), with each representing a different portion of the process with differing external variables and forces. Each portion of the simulation uses the final position and velocity of the preeceding part as initial conditions, with the exception of approx which has initial conditions determined in the function parameters, resulting in a full deorbit simulation.
+The program calls 4 functions, orbital_decay, final_burn, reentry, and rocket (in that order), with each representing a different portion of the process with differing external variables and forces. Each portion of the simulation uses the final position and velocity of the preeceding part as initial conditions, with the exception of rocket which has initial conditions determined in the function parameters, resulting in a full deorbit simulation.
 
 Each stage represents a portion of the process with differing external variables.
 
