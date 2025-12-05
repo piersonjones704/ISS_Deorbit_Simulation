@@ -14,7 +14,6 @@ def final_burn(altitude, velocity, time_minutes):
     Cd = 2.07
     A = 1000.0
     m = 480000.0
-    rho = RHO_0*np.exp(-(altitude/7500))
 
     # Initial conditions
     altitude = np.array([altitude[-1,:]])
@@ -33,7 +32,8 @@ def final_burn(altitude, velocity, time_minutes):
         
         r = np.linalg.norm(pos)
         u = pos / r
-
+        alt = r - R_EARTH
+        rho = RHO_0 * np.exp(-alt / 7500)
         
         g_mag = G * M_EARTH / r**2
         g_vec = -g_mag * u
