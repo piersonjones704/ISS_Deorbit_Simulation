@@ -34,7 +34,7 @@ def grav_force(t, h):
 def a(t, h, v):
     return (thrust(t) - drag_force(v, h) - grav_force(t, h))/m(t)
 
-def approx(sim_time, t_step, h_0, v_0):
+def rocket(sim_time, t_step, h_0, v_0):
     t = 0.0
     h = h_0
     v = v_0
@@ -78,7 +78,7 @@ def main():
     t_step = 0.01
     h_0 = 0
     v_0 = 0
-    time, height, velocity, max = approx(sim_time, t_step, h_0, v_0)
+    time, height, velocity, max = rocket(sim_time, t_step, h_0, v_0)
     print(max)
     plot_simple(time, height)
     #plot_simple(time, velocity)
