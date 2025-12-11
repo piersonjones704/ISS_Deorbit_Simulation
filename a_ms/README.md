@@ -63,14 +63,13 @@ Our project is able to simulate the deorbit of the ISS by dividing the proces in
 
 ## Usage
 
-The use of the program requires the input of an initial ISS altitude, velocity, orbital decay simulation duration, final burn simulation duration, rocket altitude, rocket launch velocity, and rocket launch simulation time. The order of input is as follows:
+The use of the program requires the input of an initial ISS altitude, velocity, time step, orbital decay simulation duration, and final burn simulation duration. The order of input is as follows:
 * Initial Altitude: This is the height of the station above the earth, in the simulation it is treated as initial y position. (Given in kilometers)
 * Velocity: This is the initial velocity of the station, all in the x direction, in the simulation it is treated as initial x velocity. (Given in meters per second)
+* Time step: The interval of time used to break down the continuous simulation into small steps that can be integrated.
 * Orbital Decay Simulation Duration: How long the user wants the orbital decay component to run for. (Given in minutes)
 * Final Burn Simuation Duration: How long the user wants the final burn component to run for. (Given in minutes)
-* Initial Rocket Altitude: This is the height the rocket launch begins at (Given in kilometers)
-* Initial Rocket Launch Velocity: The initial velocity of the rocket when it is launched (Given in meters per second)
-* Rocket Launch Simulation Duration: How long the rocket launch portion of the simulation should run (calculated based on additional factors such as wet mass, dry mass, and rocket exhaust mass flow rate)
+
 
 ### [Role 1] - Orbital Decay
 The orbital decay acceleration function corresponds to the second phase of the ISS simulation. It takes two parameters in the following order:
@@ -99,8 +98,8 @@ Similar to the previous milestone, the reentry function corresponds to the third
 
 * final position of the ISS (x and y coordinate) from the final burn stage as the initial position for this stage
 * final velocity (x and y components) from the final burn stage as the initial velocity for this stage
-* tstep, which is responsible for controlling the interval at which data is calculated and plotted 
-* max_steps which is responsible for controlling how long this portion of the simulation is ran 
+* timestep, which is responsible for controlling the interval at which data is calculated and plotted 
+* reentry_max_steps which is responsible for controlling how long this portion of the simulation is ran 
 
 With the input of these parameters, the function will run, simulating the reentry trajectory of the ISS. Unlike the previous milestone, this reentry component will simulate the ISS's travel until it reaches an altitude of 100 km. Once it reaches this alitutde, it will model the ISS and truss separating during its descent. With the separation of these components the truss's position and velocity will be calculated and plotted to its point of impact.
 
@@ -142,4 +141,5 @@ Here, we reached the last step of the project where we use a higher order numeri
 Authors: Justin Fu, Reid Korva, Pierson Jones, Rohan Deshmukh
 
 ## AI statement
+
 No AI was used in the development of the code or the writing in the md file. 
