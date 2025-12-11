@@ -2,7 +2,23 @@
 
 ## Live Document Links
 
+### Planning Document
+
 Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2rmjjUFR3-em32RshCD2co25l5qMrgn1TTljqvA/edit?usp=sharing)
+
+### Demonstration Video
+
+Demonstration video - [Source](paste link here)
+
+### Personal Reflections 
+
+Pierson's reflection - [Source](https://warpwire.duke.edu/w/iSEJAA/)
+
+Rohan's reflection - [Source](paste link here)
+
+Justin's reflection - [Source](paste link here)
+
+Reid's reflection - [Source](paste link here)
 
 ## Description
 
