@@ -11,9 +11,14 @@ def final_burn_accel(pos, vel):
       Cd = 2.07
       A = 1000.0
       m = 480000.0
-      rho = 3.8e-12
+
+      
+      
       r = np.linalg.norm(pos)
       u = pos / r
+      alt = r - R_EARTH
+      rho = RHO_0 * np.exp(-alt / 7500)
+      
 
         
       g_mag = G * M_EARTH / r**2

@@ -34,6 +34,8 @@ def final_burn(altitude, velocity, time_minutes):
         u = pos / r
         alt = r - R_EARTH
         rho = RHO_0 * np.exp(-alt / 7500)
+
+
         
         g_mag = G * M_EARTH / r**2
         g_vec = -g_mag * u
