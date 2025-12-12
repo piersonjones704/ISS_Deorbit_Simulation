@@ -180,6 +180,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         #Check if rocket hit ground
         if rocket_pos[i + 1] <= 0 and has_launched == True:
             rocket_pos = rocket_pos[:i]
+            rocket_pos[-1] = 0
             rocket_vel = rocket_vel[:i]
             rocket_time = rocket_time[:i]
             break 
