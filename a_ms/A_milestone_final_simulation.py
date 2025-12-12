@@ -130,24 +130,26 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     if not testing:
         print(f"Final altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
         print(f"Total simulation time: {time[interval]:.1f} seconds ({time[interval]/60:.1f} minutes)")
-    # If no separation occurred, go to starting point
+    # If no separation occurred, use starting point of reentry for separation
     reentry_start_interval = len(od_time) + len(fb_time)
     if separation_pos is None:
         if reentry_start_interval < len(pos):
             if not testing:
-                print("Separation did not occur, reentry's start position is being used for separation")
+                print("Separation at 100 km altitude did not occur.")
+                print("Using reentry start position as approximation.")
             separation_pos = pos[reentry_start_interval].copy()
             separation_vel = vel[reentry_start_interval].copy()
         else:
             if not testing: 
-                print("Error. Simulation ended before reentry phase could begin")
-            separation_pos = pos[0].copy()
-            separation_vel = vel[0].copy()
+                print("Error. Simulation ended before reentry phase.")
+            # Leave separation_pos as None
     # Determine horizontal distance traveled by the truss
-    # Convert separation and impact positions into unit vectors
     if impact_pos is None:
         if not testing:
             print("Impact did not occur, so the horizontal distance cannot be calculated")
+    elif separation_pos is None:
+        if not testing:
+            print("Separation position not known. Unable to calculate horizontal distance")
     else:
         separation_unit_vector = separation_pos / np.linalg.norm(separation_pos)
         impact_unit_vector = impact_pos / np.linalg.norm(impact_pos)
