@@ -105,7 +105,7 @@ With the input of these parameters, the function will run, simulating the reentr
 
 ### [Role 4] - Rocket Trajectory
 
-Given standard rocket parameters (wet mass, mass ratio, mass flow rate, surface area, drag coefficient, and specific impulse), an initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using a second order Runge-Kutta simulation. The program plugs these inital parameters into a function that calculates the acceleration of the rocket based on the net force on the rocket and the changing mass, and outputs a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. 
+Given standard rocket parameters (wet mass, mass ratio, mass flow rate, surface area, drag coefficient, and specific impulse), an initial height, and an initial velocity, this program will run a 1D simulation of a rocket trajectory using a second order Runge-Kutta simulation. The program plugs these inital parameters into a function that calculates the acceleration of the rocket based on the net force on the rocket and the changing mass, and outputs a lists of the rockets velocity and height, as well as times corresponding to these values. The program will then graph height vs time. This program has been optimized to use the minimum percentage of fuel necessary to reach 400km in altitude, the altitude necessary to meet the deorbiting ISS.
 
 ## Testing
 
