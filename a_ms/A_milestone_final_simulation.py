@@ -181,6 +181,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         #Check if rocket hit ground
         if rocket_pos[i + 1] <= 0 and has_launched == True:
             rocket_pos = rocket_pos[:i]
+            rocket_pos[-1] = 0
             rocket_vel = rocket_vel[:i]
             rocket_time = rocket_time[:i]
             break 
@@ -212,7 +213,7 @@ if __name__ == '__main__':
         main(altitude, velocity, timestep, orbital_decay_time, final_burn_time)
     else:
         print("Incorrect Usage, needs 5 arguments")
-        print("Correct usage structure: python A_milestone_final_simulation.py 275e3 7700 1 90 60")
+        print("Correct usage structure: python A_milestone_final_simulation.py 275e3 7700 0.1 90 60")
         sys.exit(1)
 
 # if __name__ == '__main__':
