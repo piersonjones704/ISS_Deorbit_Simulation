@@ -48,7 +48,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         time[interval] = time[interval - 1] + timestep
     if not testing:
         print(f"Orbital Decay Final Altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
-    if (np.linalg.norm(pos[interval]) - R_EARTH)/1000 == 0:
+    if (np.linalg.norm(pos[interval]) - R_EARTH)/1000 <= 0:
         status1 = 'hit ground'
         return status1
     else:   
@@ -66,7 +66,7 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
         time[interval] = time[interval - 1] + timestep
     if not testing:
         print(f"Final Burn Final Altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
-    if (np.linalg.norm(pos[interval]) - R_EARTH)/1000 == 0:
+    if (np.linalg.norm(pos[interval]) - R_EARTH)/1000 <= 0:
         status2 = 'hit ground'
         return status2
     else:   
@@ -134,9 +134,13 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     reentry_start_interval = len(od_time) + len(fb_time)
     if separation_pos is None:
         if reentry_start_interval < len(pos):
+            if not testing:
+                print("Separation did not occur, reentry's start position is being used for separation")
             separation_pos = pos[reentry_start_interval].copy()
             separation_vel = vel[reentry_start_interval].copy()
         else:
+            if not testing: 
+                print("Error. Simulation ended before reentry phase could begin")
             separation_pos = pos[0].copy()
             separation_vel = vel[0].copy()
     # Determine horizontal distance traveled by the truss
@@ -197,5 +201,14 @@ def main(altitude, velocity, timestep, orbital_decay_time, final_burn_time, test
         print(f"Final ISS Status: {final_ISS_status}")
     return final_ISS_status
 
+import sys
+
 if __name__ == '__main__':
-    main(275000,7700,0.1,90,60)
+    if len(sys.argv) == 6:
+        altitude, velocity, timestep, orbital_decay_time, final_burn_time = map(float, sys.argv[1:])
+        main(altitude, velocity, timestep, orbital_decay_time, final_burn_time)
+    else:
+        print("Incorrect Usage, needs 5 arguments")
+        print("Correct usage structure: python A_milestone_final_simulation.py 275e3 7700 1 90 60")
+        sys.exit(1)
+
