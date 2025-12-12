@@ -212,3 +212,5 @@ if __name__ == '__main__':
         print("Correct usage structure: python A_milestone_final_simulation.py 275e3 7700 1 90 60")
         sys.exit(1)
 
+# if __name__ == '__main__':
+#     main(275000,7700,0.1,90,60)
