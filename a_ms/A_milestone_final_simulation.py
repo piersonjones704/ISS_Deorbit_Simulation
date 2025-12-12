@@ -130,9 +130,10 @@ def final_simulation(altitude, velocity, timestep, orbital_decay_time, final_bur
     if not testing:
         print(f"Final altitude: {np.abs(np.linalg.norm(pos[interval]) - R_EARTH)/1000:.2f} km")
         print(f"Total simulation time: {time[interval]:.1f} seconds ({time[interval]/60:.1f} minutes)")
-    # If no separation occurred, use starting point of reentry for separation
+    # If no separation occurred determine if using the reentry starting point as an approximation is valid
     reentry_start_interval = len(od_time) + len(fb_time)
     if separation_pos is None:
+        # Fallback code - use reentry start as approximation for separation
         if reentry_start_interval < len(pos):
             if not testing:
                 print("Separation at 100 km altitude did not occur.")
