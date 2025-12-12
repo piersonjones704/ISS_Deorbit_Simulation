@@ -8,7 +8,7 @@ Tasks Planning Document - [Source](https://docs.google.com/spreadsheets/d/173YS2
 
 ### Demonstration Video
 
-Demonstration video - [Source](paste link here)
+Demonstration video - [Source](https://warpwire.duke.edu/w/mSAJAA/)
 
 ### Personal Reflections 
 
@@ -18,7 +18,7 @@ Rohan's reflection - [Source](paste link here)
 
 Justin's reflection - [Source](paste link here)
 
-Reid's reflection - [Source](paste link here)
+Reid's reflection - [Source](https://warpwire.duke.edu/w/oSQJAA/)
 
 ## Description
 
