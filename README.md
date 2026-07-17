@@ -124,9 +124,18 @@ Each milestone includes its own test suite (`test_A_ms_simulation.py`, `test_ful
 | **B** | Integration of all four stages into a single chained simulation with unit handling | Euler's method |
 | **A** | Refactor to a shared numerical integrator; higher-order accuracy; separation/impact interpolation | Runge-Kutta 4 (RK4) |
 
-## Authors
+## Team Project
 
-Pierson Jones, Justin Fu, Reid Korva, Rohan Deshmukh
+This project was completed as part of a four-person engineering team (Pierson Jones, Justin Fu, Reid Korva, Rohan Deshmukh), with each member owning a stage of the simulation and contributing to the shared integration and testing work.
+
+### My contributions
+
+- Owned the re-entry trajectory stage end-to-end across all four milestones (reentry_C_.py, reentry_B_.py, Reentry_Acceleration_Function.py), including the separation/impact interpolation logic in the final RK4 version
+- Built the full-simulation integration files that chain all four stages together (full_simulation_file.py, A_milestone_final_simulation.py)
+- Implemented all plotting and visualization (plot.py, A_ms_plotting.py)
+- Wrote the test suites across all milestones (reentry_testing.py, test_full_simulation.py, test_A_ms_simulation.py)
+
+The Git commit history has been preserved to reflect each team member's contributions.
 
 ## AI Statement
 
